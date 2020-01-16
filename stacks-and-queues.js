@@ -5,7 +5,7 @@ class Node {
     }
 }
 
-class Stack {
+class Stack { // FILO
     constructor() {
         this.top = null;
     }
@@ -36,7 +36,7 @@ console.log(testStack.push(2)) // obj: {this.top: node{val: 2, nxt: node{val: 1,
 console.log(testStack.pop()) // obj: node{val: 2, nxt: null}
 console.log(testStack.push(3)) // obj: {this.top: node{val: 3, nxt: node{val: 1, nxt: null}}}
 
-class Queue {
+class Queue { // FIFO
     constructor() {
         this.head = null;
         this.tail = null;
