@@ -31,10 +31,10 @@ class Stack { // FILO
 
 const testStack = new Stack;
 
-console.log(testStack.push(1)) // obj: {this.top: node{val: 1, nxt: null}}
-console.log(testStack.push(2)) // obj: {this.top: node{val: 2, nxt: node{val: 1, nxt: null}}}
-console.log(testStack.pop()) // obj: node{val: 2, nxt: null}
-console.log(testStack.push(3)) // obj: {this.top: node{val: 3, nxt: node{val: 1, nxt: null}}}
+console.log(testStack.push(1)) // obj: {top: Node{val: 1, nxt: null}}
+console.log(testStack.push(2)) // obj: {top: Node{val: 2, nxt: Node{val: 1, nxt: null}}}
+console.log(testStack.pop()) // obj: Node{val: 2, nxt: null}
+console.log(testStack.push(3)) // obj: {top: Node{val: 3, nxt: Node{val: 1, nxt: null}}}
 
 class Queue { // FIFO
     constructor() {
@@ -43,6 +43,37 @@ class Queue { // FIFO
     }
 
     push(val) {
+        const newNode = new Node(val)
+        if (!this.head) {
+            this.head = newNode;
+            this.tail = newNode;
+        }
 
+        this.tail.next = newNode;
+        this.tail = newNode;
+
+        return this;
+    }
+
+    pop() {
+        if (!this.head) return null;
+
+        if (this.head === this.tail) {
+            this.head = null;
+            this.tail = null;
+        }
+
+        const removedHead = this.head;
+        this.head = this.head.next;
+
+        return removedHead;
     }
 }
+
+const testQueue = new Queue;
+
+console.log(testQueue.push(1)) // obj: {head: Node{val: 1, nxt: null}, tail: Node{val: 1, nxt: null}}
+console.log(testQueue.push(2)) // obj: {head: Node{val: 1, nxt:  Node{val: 2, nxt: null}}, tail: Node{val: 2, nxt: null}}
+console.log(testQueue.push(3)) // obj: {head: Node{val: 1, nxt:  Node{val: 2, nxt: Node{val: 3, nxt: null}}}, tail: Node{val: 3, nxt: null}}
+console.log(testQueue.pop()) // Node{val: 1, nxt:  Node{val: 2, nxt: Node{val: 3, nxt: null}}}
+console.log(testQueue.head) // Node{val: 2, next: Node {val: 3, next: null}}
