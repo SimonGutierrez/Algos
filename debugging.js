@@ -27,8 +27,9 @@ const logFibEven = (obj) => {
             console.log(element);
         }
     });
-
 }
 
+
 console.log(logAllPrime(nestedData)) // 2, 3, 5, 7 , 11
-console.log(logFibEven(nestedData))
+console.log(logFibEven(nestedData)) // 2, 8
+
