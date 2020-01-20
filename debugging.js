@@ -69,6 +69,9 @@ function loopToFive(){
         console.log(i);
     }
 }
+
+// syntax error in loop should use semicolins and not commas; change to : for (var i=0; i < 5; i++)
+
 4.
 
 function displayEvenNumbers(){
