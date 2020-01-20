@@ -49,7 +49,7 @@ for(var i=0; i > 5; i++){
     console.log(i);
 }
 
-//
+// code in loop will never run bc i is never greater than 5; change condition to : i < 5;
 
 2.
 
@@ -59,6 +59,9 @@ function addIfEven(num){
     }
     return num;
 }
+
+// condition in if statement is setting num % 2 equal to 0 this will give a reference error; change to : num % 2 === 0;
+
 3.
 
 function loopToFive(){
