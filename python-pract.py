@@ -8,7 +8,11 @@ elif
 print("Greetings, hater of pirates!")
 
 # correct code
-
+greeting = input("Hello, possible pirate! What's the password?")
+if greeting in ["Arrr!"] :
+    print("Go away, pirate.")
+else :
+    print("Greetings, hater of pirates!")
 
 # Collections
 authrs = {
@@ -23,69 +27,69 @@ for author date in authors.items{}:
 
 # correct code
 
-# Branching
-year == int.input("Greetings! What is your year of origin? '))
+# # Branching
+# year == int.input("Greetings! What is your year of origin? '))
 
-if year <= 1900
-    print ('Woah, that's the past!')
-elif year > 1900 && year < 2020:
-    print ("That's totally the present!")
-elif:
-    print ("Far out, that's the future!!")
+# if year <= 1900
+#     print ('Woah, that's the past!')
+# elif year > 1900 && year < 2020:
+#     print ("That's totally the present!")
+# elif:
+#     print ("Far out, that's the future!!")
 
-# correct code
+# # correct code
 
-# Classes
-classy Person:
-  def __initalize__(self, first_name, last_name):
-    self.first = first_name
-    self.last = lname
-  def speak(self):
-  print("My name is + " self.fname + " " + self.last)
+# # Classes
+# classy Person:
+#   def __initalize__(self, first_name, last_name):
+#     self.first = first_name
+#     self.last = lname
+#   def speak(self):
+#   print("My name is + " self.fname + " " + self.last)
 
-me = Person("Brandon", "Walsh")
-you = Person("Ethan", "Reed")
+# me = Person("Brandon", "Walsh")
+# you = Person("Ethan", "Reed")
 
-me.speak()
-you.self.speak
+# me.speak()
+# you.self.speak
 
-# correct code
+# # correct code
 
-# Grading
-exam_one = int(input("Input exam grade one: "))
+# # Grading
+# exam_one = int(input("Input exam grade one: "))
 
-exam_two = input("Input exam grade two: "))
+# exam_two = input("Input exam grade two: "))
 
-exam_3 = str(input("Input exam grade three: "))
+# exam_3 = str(input("Input exam grade three: "))
 
-grades = [exam_one exam_two exam_three]
-sum = 0
-for grade in grade:
-  sum = sum + grade
+# grades = [exam_one exam_two exam_three]
+# sum = 0
+# for grade in grade:
+#   sum = sum + grade
 
-avg = sum / len(grdes)
+# avg = sum / len(grdes)
 
-if avg >= 90:
-    letter_grade = "A"
-elif avg >= 80 and avg < 90
-    letter_grade = "B"
-elif avg > 69 and avg < 80:
-    letter_grade = "C'
-elif avg <= 69 and avg >= 65:
-    letter_grade = "D"
-elif:
-    letter_grade = "F"
+# if avg >= 90:
+#     letter_grade = "A"
+# elif avg >= 80 and avg < 90
+#     letter_grade = "B"
+# elif avg > 69 and avg < 80:
+#     letter_grade = "C'
+# elif avg <= 69 and avg >= 65:
+#     letter_grade = "D"
+# elif:
+#     letter_grade = "F"
 
-for grade in grades:
-    print("Exam: " + str(grade))
+# for grade in grades:
+#     print("Exam: " + str(grade))
 
-    print("Average: " + str(avg))
+#     print("Average: " + str(avg))
 
-    print("Grade: " + letter_grade)
+#     print("Grade: " + letter_grade)
 
-if letter-grade is "F":
-    print "Student is failing."
-else:
-    print "Student is passing."
+# if letter-grade is "F":
+#     print "Student is failing."
+# else:
+#     print "Student is passing."
 
-# correct code
+# # correct code
