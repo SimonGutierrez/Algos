@@ -84,6 +84,6 @@ function displayEvenNumbers(){
         return evenNumbers;
     }
 }
-displayEvenNumbers(); // should return [2,4,6,8] 
+displayEvenNumbers(); // should return [2,4,6,8] HINT: there are 8 bugs in this code.
 
 
