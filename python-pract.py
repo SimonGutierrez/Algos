@@ -1,31 +1,40 @@
 # debugging
 
-# Pirates
-greeting = input("Hello, possible pirate! What's the password?")
-if greeting in ["Arrr!"): 
-    print("Go away, pirate.")
-elif
-print("Greetings, hater of pirates!")
+# # Pirates
+# greeting = input("Hello, possible pirate! What's the password?")
+# if greeting in ["Arrr!"): 
+#     print("Go away, pirate.")
+# elif
+# print("Greetings, hater of pirates!")
 
-# correct code
-greeting = input("Hello, possible pirate! What's the password?")
-if greeting in ["Arrr!"] :
-    print("Go away, pirate.")
-else :
-    print("Greetings, hater of pirates!")
+# # correct code
+# greeting = input("Hello, possible pirate! What's the password?")
+# if greeting in ["Arrr!"] :
+#     print("Go away, pirate.")
+# else :
+#     print("Greetings, hater of pirates!")
 
 # Collections
-authrs = {
+# authrs = {
+#     "Charles Dickens": "1870",
+#     "William Thackeray": "1863",
+#     "Anthony Trollope": "1882",
+#     "Gerard Manley Hopkins": "1889"
+
+# for author date in authors.items{}:
+#     print "%s" % authors + " died in " + "%d." % Date
+# }
+
+# correct code
+authors = {
     "Charles Dickens": "1870",
     "William Thackeray": "1863",
     "Anthony Trollope": "1882",
     "Gerard Manley Hopkins": "1889"
-
-for author date in authors.items{}:
-    print "%s" % authors + " died in " + "%d." % Date
 }
 
-# correct code
+for author, date in authors.items():
+    print ("%s" % author + " died in " + "%s." % date)
 
 # # Branching
 # year == int.input("Greetings! What is your year of origin? '))
