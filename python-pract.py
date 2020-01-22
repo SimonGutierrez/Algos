@@ -14,7 +14,7 @@
 # else :
 #     print("Greetings, hater of pirates!")
 
-# Collections
+# # Collections
 # authrs = {
 #     "Charles Dickens": "1870",
 #     "William Thackeray": "1863",
@@ -25,28 +25,28 @@
 #     print "%s" % authors + " died in " + "%d." % Date
 # }
 
-# correct code
-authors = {
-    "Charles Dickens": "1870",
-    "William Thackeray": "1863",
-    "Anthony Trollope": "1882",
-    "Gerard Manley Hopkins": "1889"
-}
-
-for author, date in authors.items():
-    print ("%s" % author + " died in " + "%s." % date)
-
-# # Branching
-# year == int.input("Greetings! What is your year of origin? '))
-
-# if year <= 1900
-#     print ('Woah, that's the past!')
-# elif year > 1900 && year < 2020:
-#     print ("That's totally the present!")
-# elif:
-#     print ("Far out, that's the future!!")
-
 # # correct code
+# authors = {
+#     "Charles Dickens": "1870",
+#     "William Thackeray": "1863",
+#     "Anthony Trollope": "1882",
+#     "Gerard Manley Hopkins": "1889"
+# }
+
+# for author, date in authors.items():
+#     print ("%s" % author + " died in " + "%s." % date)
+
+# Branching
+year == int.input("Greetings! What is your year of origin? '))
+
+if year <= 1900
+    print ('Woah, that's the past!')
+elif year > 1900 && year < 2020:
+    print ("That's totally the present!")
+elif:
+    print ("Far out, that's the future!!")
+
+# correct code
 
 # # Classes
 # classy Person:
