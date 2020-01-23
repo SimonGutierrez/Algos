@@ -36,33 +36,41 @@
 # for author, date in authors.items():
 #     print ("%s" % author + " died in " + "%s." % date)
 
-# Branching
-year == int.input("Greetings! What is your year of origin? '))
+# # Branching
+# year == int.input("Greetings! What is your year of origin? '))
 
-if year <= 1900
-    print ('Woah, that's the past!')
-elif year > 1900 && year < 2020:
-    print ("That's totally the present!")
-elif:
-    print ("Far out, that's the future!!")
-
-# correct code
-
-# # Classes
-# classy Person:
-#   def __initalize__(self, first_name, last_name):
-#     self.first = first_name
-#     self.last = lname
-#   def speak(self):
-#   print("My name is + " self.fname + " " + self.last)
-
-# me = Person("Brandon", "Walsh")
-# you = Person("Ethan", "Reed")
-
-# me.speak()
-# you.self.speak
+# if year <= 1900
+#     print ('Woah, that's the past!')
+# elif year > 1900 && year < 2020:
+#     print ("That's totally the present!")
+# elif:
+#     print ("Far out, that's the future!!")
 
 # # correct code
+# year = int(input("Greetings! What is your year of origin?"))
+
+# if year <= 1900:
+#     print ("Woah, that's the past!")
+# elif year > 1900 and year < 2020:
+#     print ("That's totally the present!")
+# else:
+#     print ("Far out, that's the future!!")
+
+# Classes
+classy Person:
+  def __initalize__(self, first_name, last_name):
+    self.first = first_name
+    self.last = lname
+  def speak(self):
+  print("My name is + " self.fname + " " + self.last)
+
+me = Person("Brandon", "Walsh")
+you = Person("Ethan", "Reed")
+
+me.speak()
+you.self.speak
+
+# correct code
 
 # # Grading
 # exam_one = int(input("Input exam grade one: "))
