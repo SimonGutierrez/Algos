@@ -17,8 +17,8 @@ function getNthFib(n) {
     return secondFib;
 }
 
-// Time: O(2^n)
-// Space: O(n)
+// Time: O(n)
+// Space: O(1)
 
 console.log(getNthFib(-2)) // 'invalid: no neg numbers or zero'
 console.log(getNthFib(1)) // 0
