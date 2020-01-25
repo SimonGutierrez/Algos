@@ -1,22 +1,18 @@
 function isPalindrome(string) {
-    let reverse = '';
-    let endHalf = '';
-    let midPt = Math.floor(string.length / 2);
+    let rightPointer = string.length - 1;
+    let leftPointer = 0;
 
-    for (let i = 0; i < midPt; i++) {
-        reverse = string[i] + reverse;
+    while (leftPointer < rightPointer) {
+        if (string[leftPointer] !== string[rightPointer]) return false;
+        leftPointer++;
+        rightPointer--;
     }
 
-    if (string.length % 2 === 0 ) {
-        endHalf = string.slice(midPt, string.length);
-    } else {
-        endHalf = string.slice(midPt + 1, string.length);
-    }
-
-    if (reverse === endHalf) return true;
-
-    return false;
+    return true;
 }
+
+// Time: O(n)
+// Space: O(1)
 
 console.log(isPalindrome('tacocat')) // true
 console.log(isPalindrome('poop')) // true
