@@ -1,17 +1,26 @@
 function getNthFib(n) {
-  if (n === 2) {
+    let firstFib = 0;
+    let secondFib = 1;
 
-    return 1;
+    if (n < 1) {
+        return 'invalid: no neg numbers or zero'
+    } else if (n === 1) {
+        return firstFib;
+    }
 
-  } else if (n === 1) {
+    for (let i = 2; i < n; i++) {
+        let nthFib = firstFib + secondFib;
+        firstFib = secondFib;
+        secondFib = nthFib;
+    }
 
-    return 0;
-
-  } else {
-
-    return getNthFib(n - 1) + getNthFib(n - 2);
-  }
+    return secondFib;
 }
 
+// Time: O(2^n)
+// Space: O(n)
 
-console.log(getNthFib(7)) // 0
+console.log(getNthFib(-2)) // 'invalid: no neg numbers or zero'
+console.log(getNthFib(1)) // 0
+console.log(getNthFib(2)) // 1
+console.log(getNthFib(7)) // 8
