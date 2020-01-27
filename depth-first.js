@@ -13,13 +13,14 @@ class Node {
     array.push(this.name);
     for (let i = 0; i < this.children.length; i++) {
         let child = this.children[i];
-
         if (child.children) {
             child.depthFirstSearch(array);
-        } else {
-            array.push(this.name);
         }
       }
+
       return array;
     }
   }
+
+  // Time: O(v + e) - depending on the number of the verticies and edges a tree has
+  // Space: O(v) - the number of verticies bc each verticie will call the function again
