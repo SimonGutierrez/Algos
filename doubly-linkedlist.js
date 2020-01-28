@@ -141,4 +141,14 @@ class StartNode {
         return false;
         }
   }
+// SEARCHING
+// Time: O(n) - number of nodes;
+// Space: O(1) - not storing anything;
 
+// Removing
+// Time: O(1) - all done in constat time operations
+// Space: O(1) - not storing anything;
+
+// insert at pos
+// Time: O(p) - traverse to p;
+// Space: O(1) - no storing;
