@@ -13,7 +13,7 @@ class StartNode {
       }
 
       setHead(node) {
-          if (this.head === null) {
+          if (!this.head) {
               this.head = node;
               this.tail = node;
 
@@ -25,7 +25,7 @@ class StartNode {
       }
 
       setTail(node) {
-          if (this.tail === null) {
+          if (!this.tail) {
               this.setHead(node);
 
               return;
@@ -42,7 +42,7 @@ class StartNode {
           nodeToInsert.prev = node.prev;
           nodeToInsert.next = node;
 
-          if (node.prev === null) {
+          if (!node.prev) {
               this.head = nodeToInsert;
           } else {
               node.prev.next = nodeToInsert;
@@ -58,7 +58,7 @@ class StartNode {
           nodeToInsert.prev = node;
           nodeToInsert.next = node.next;
 
-          if (node.next === null) {
+          if (!node.next) {
               this.tail = nodeToInsert;
           } else {
               node.next.prev = nodeToInsert;
@@ -77,12 +77,12 @@ class StartNode {
           let currNode = this.head;
           let currPosition = 1;
 
-          while (currNode !== null && currPosition !== position) {
+          while (currNode && currPosition !== position) {
               currNode = currNode.next;
               currPosition = currPosition + 1;
           }
 
-          if (currNode !== null) {
+          if (currNode) {
               this.insertBefore(currNode, nodeToInsert);
           } else {
               this.setTail(nodeToInsert);
@@ -125,6 +125,7 @@ class StartNode {
           node.next = null;
       }
   }
+
 // SEARCHING
 // Time: O(n) - number of nodes;
 // Space: O(1) - not storing anything;
