@@ -20,6 +20,9 @@ function selectionSort(array) {
     return array;
   }
 
+  // Time: O(n^2);
+  // Space: O(1);
+
   console.log(selectionSort([2, 3, 1, 4])) // [1, 2, 3, 4]
   console.log(selectionSort([2, 3, 1, 4, 6, 5])) // [1, 2, 3, 4, 5, 6]
   console.log(selectionSort([8, 5, 2, 9, 5, 6, 3])) // [2, 3, 5, 5, 6, 8, 9]
