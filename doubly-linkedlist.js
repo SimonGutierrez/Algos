@@ -13,69 +13,79 @@ class StartNode {
     }
 
     setHead(node) {
-        if (this.head) {
-            if (this.containsNodeWithValue(node.value)) {
-                this.remove(node);
-            }
-            this.head.prev = node;
-            node.next = this.head;
-            this.head = node;
-        } else {
+        if (!this.head) {
             this.head = node;
             this.tail = node;
+        } else {
+            this.insertBefore(this.head, node)
         }
     }
 
     setTail(node) {
-        if (this.tail) {
-            if (this.containsNodeWithValue(node.value)) {
-                this.remove(node)
-            }
-			this.tail.next = node;
-			node.prev = this.tail;
-			this.tail = node;
-	    } else {
-			this.head = node;
-			this.tail = node;
-		}
+        if (!this.tail) {
+            this.head = node;
+            this.tail = node;
+        } else {
+            this.insertAfter(this.tail, node)
+        }
     }
 
     insertBefore(node, nodeToInsert) {
-      // Write your code here.
+      let currNode = this.head;
+
+      while (currNode) {
+          if (currNode.value === node.value) {
+              if (!currNode.prev) {
+                  nodeToInsert.next = this.head;
+                  this.head = nodeToInsert;
+              } else {
+                  nodeToInsert.prev = currNode.prev;
+                  nodeToInsert.next = currNode;
+                  currNode.prev.next = nodeToInsert;
+                  currNode.prev = nodeToInsert;
+              }
+          } else {
+              currNode = currNode.next;
+          }
+      }
     }
 
     insertAfter(node, nodeToInsert) {
-      // Write your code here.
+        let currNode = this.head;
+
+        while (currNode) {
+            if (currNode.value === node.value) {
+                if (!currNode.next) {
+                    nodeToInsert.prev = this.tail;
+                    this.tail = nodeToInsert;
+                } else {
+                    nodeToInsert.prev = currNode;
+                    nodeToInsert.next = currNode.next;
+                    currNode.next.prev = nodeToInsert;
+                    currNode.next = nodeToInsert;
+                }
+            } else {
+                currNode = currNode.next;
+            }
+        }
     }
 
     insertAtPosition(position, nodeToInsert) {
-        let currPosistion = 1;
+        let currPosistion = 0;
         let currNode = this.head;
 
-        while (currPosistion <= position) {
-
-            if (currPosistion === position) {
-                if (this.head === null) {
-                    this.head = nodeToInsert;
-                    this.tail = nodeToInsert;
-                } else {
-                    nodeToInsert.next = currNode;
-                    nodeToInsert.prev = currNode.prev;
-                    currNode.prev.next = nodeToInsert;
-                    currNode.prev = nodeToInsert;
-
-                    if (nodeToInsert.next === null) {
-                        this.tail = nodeToInsert;
-                        }
-                }
-            }
-
-            if (currNode !== null) {
+        while (currNode) {
+            if (!currNode.prev) {
+                this.setHead(nodeToInsert);
+            } else if (currPosistion === position) {
+                this.insertBefore(currPosistion, nodeToInsert);
+            } else {
                 currNode = currNode.next;
+                currPosistion++;
             }
-
-            currPosistion++;
         }
+
+        this.setTail(nodeToInsert);
 
     }
 
