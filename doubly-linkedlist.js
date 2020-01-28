@@ -99,10 +99,17 @@ class StartNode {
                 if (this.head === this.tail) {
                     this.head = null;
                     this.tail = null;
+                } else if (!currNode.prev) {
+                    this.head = this.head.next;
+                    this.head.prev = null
+                } else if (!currNode.next) {
+                    this.tail = this.tail.prev;
+                    this.tail.next = null;
                 } else {
-                    currNode.prev.next = currNode.next;
                     currNode.next.prev = currNode.prev;
-                    currNode = null;
+                    currNode.prev.next = currNode.next;
+                    currNode.prev = null;
+                    currNode.next = null;
                 }
             }
                 currNode = currNode.next;
@@ -119,6 +126,7 @@ class StartNode {
                 currNode = currNode.next;
             }
         }
+
         return false;
         }
   }
