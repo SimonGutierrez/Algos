@@ -13,12 +13,12 @@ class StartNode {
     }
 
     setHead(node) {
-        if (this.head !== null) {
+        if (this.head) {
             if (this.containsNodeWithValue(node.value)) {
                 this.remove(node);
             }
-            node.next = this.head;
             this.head.prev = node;
+            node.next = this.head;
             this.head = node;
         } else {
             this.head = node;
@@ -27,7 +27,10 @@ class StartNode {
     }
 
     setTail(node) {
-        if (this.head !== this.tail) {
+        if (this.tail) {
+            if (this.containsNodeWithValue(node.value)) {
+                this.remove(node)
+            }
 			this.tail.next = node;
 			node.prev = this.tail;
 			this.tail = node;
@@ -35,10 +38,6 @@ class StartNode {
 			this.head = node;
 			this.tail = node;
 		}
-
-		if (this.containsNodeWithValue(node.value)) {
-					this.remove(node);
-			}
     }
 
     insertBefore(node, nodeToInsert) {
@@ -82,10 +81,10 @@ class StartNode {
 
     removeNodesWithValue(value) {
         let currNode = this.head;
-
+        // does there need to be another temp var?
         while (currNode) {
             if (currNode.value === value) {
-                currNode.remove(currNode);
+                this.remove(currNode);
             }
 
             currNode = currNode.next;
@@ -97,7 +96,7 @@ class StartNode {
 
         while (currNode) {
             if (currNode.value === node.value) {
-                if (this.head === this.tail) {
+                if (!currNode.prev && !currNode.next) {
                     this.head = null;
                     this.tail = null;
                 } else if (!currNode.prev) {
@@ -112,8 +111,9 @@ class StartNode {
                     currNode.prev = null;
                     currNode.next = null;
                 }
-            }
+            } else {
                 currNode = currNode.next;
+            }
         }
     }
 
