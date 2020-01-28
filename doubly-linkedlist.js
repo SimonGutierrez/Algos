@@ -85,8 +85,9 @@ class StartNode {
 
         while (currNode) {
             if (currNode.value === value) {
-                this.remove(currNode);
+                currNode.remove(currNode);
             }
+
             currNode = currNode.next;
         }
     }
@@ -106,8 +107,8 @@ class StartNode {
                     this.tail = this.tail.prev;
                     this.tail.next = null;
                 } else {
-                    currNode.next.prev = currNode.prev;
                     currNode.prev.next = currNode.next;
+                    currNode.next.prev = currNode.prev;
                     currNode.prev = null;
                     currNode.next = null;
                 }
