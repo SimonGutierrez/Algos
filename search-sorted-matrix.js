@@ -1,5 +1,3 @@
-/* eslint-disable complexity */
-/* eslint-disable no-unused-vars */
 function searchInSortedMatrix(matrix, target) {
         let row = 0;
         let column = matrix[row].length - 1;
@@ -13,9 +11,7 @@ function searchInSortedMatrix(matrix, target) {
 
             if (currPosition > target) {
                 column--;
-            }
-
-            if (currPosition < target) {
+            } else {
                 row++;
             }
 
