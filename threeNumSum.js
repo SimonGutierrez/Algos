@@ -1,21 +1,30 @@
 function threeNumberSum(array, targetSum) {
     array.sort((a, b) => a - b);
     let pairs = [];
-    let first = 0;
-    let second = Math.floor((array.length - 1) / 2);
-    let third = array.length - 1;
+    let currIndex = 0;
 
-    while (first < second) {
-        let currSum = array[first] + array[second] + array[third];
+    while (currIndex < array.length - 2) {
+        let left = currIndex + 1;
+        let right = array.length - 1;
 
-        if (currSum > targetSum) {
-            third--;
-        } else if (currSum < targetSum) {
-            first++;
-        } else {
-            pairs.push([array[first], array[second], array[third]]);
-            second++;
+        while (left < right) {
+            let currSum = array[currIndex] + array[left] + array[right];
+
+            if (array[currIndex] > targetSum) {
+                return pairs;
+            }
+
+            if (currSum > targetSum) {
+                right--;
+            } else if (currSum < targetSum) {
+                left++;
+            } else {
+                pairs.push([array[currIndex], array[left], array[right]]);
+                left++;
+            }
         }
+
+        currIndex++;
     }
 
     return pairs;
