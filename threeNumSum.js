@@ -21,6 +21,7 @@ function threeNumberSum(array, targetSum) {
             } else {
                 pairs.push([array[currIndex], array[left], array[right]]);
                 left++;
+                right--;
             }
         }
 
@@ -30,5 +31,10 @@ function threeNumberSum(array, targetSum) {
     return pairs;
   }
 
+  // Time: O(n^2); double loop;
+  // Space: O(n); the number of triplets in the array;
 
-  console.log(threeNumberSum([12, 3, 1, 2, -6, 5, -8, 6], 0))
+  console.log(threeNumberSum([12, 3, 1, 2, -6, 5, -8, 6], 0)) // [[ -8, 2, 6 ], [ -8, 3, 5 ], [ -6, 1, 5 ]]
+  console.log(threeNumberSum([1, 2, 3], 6)) // [[1, 2, 3]]
+  console.log(threeNumberSum([1, 2, 3], 7)) // []
+  console.log(threeNumberSum([8, 10, -2, 49, 14], 57)) // [[-2, 10, 49]]
