@@ -21,5 +21,8 @@ function moveElementToEnd(array, toMove) {
     return array;
   }
 
+  // Time: O(n) worst case senario is to swap each elem;
+  // Space: O(1) constant space bc everything is done in place;
+
 
   console.log(moveElementToEnd([2, 1, 2, 2, 2, 3, 4, 2], 2))
