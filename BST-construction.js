@@ -12,7 +12,20 @@ class BST {
     }
 
     contains(value) {
-      // Write your code here.
+      let currTree = this;
+
+        while (currTree) {
+
+            if (currTree.value === value) {
+                return true;
+            } else if (currTree.value > value) {
+                currTree = currTree.left;
+            } else {
+                currTree = currTree.right;
+            }
+        }
+
+        return false;
     }
 
     remove(value) {
