@@ -6,13 +6,11 @@ class BST {
     }
   }
 
-  function validateBst(tree) {
-    while (tree !== null) {
-        if (tree.value <= tree.left || tree.value > tree.right) {
-            return false;
-        }
-        validateBst(tree.left)
-        validateBst(tree.right)
-    }
-  }
+  function validateBst(tree, min = -Infinity, max = Infinity) {
+	if (tree === null) return true;
+    if (tree.value >= max || tree.value < min) return false;
+    const leftIsValid = validateBst(tree.left, min, tree.value)
+
+    return  leftIsValid && validateBst(tree.right, tree.value, max)
+}
 
