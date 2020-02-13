@@ -14,3 +14,5 @@ class BST {
     return  leftIsValid && validateBst(tree.right, tree.value, max)
 }
 
+// Time: O(n) - based on how many nodes there are;
+// Space: O(d) - based on the callstack for thr depth of each branch;
