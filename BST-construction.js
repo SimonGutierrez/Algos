@@ -2,97 +2,96 @@
 /* eslint-disable no-lonely-if */
 class BST {
     constructor(value) {
-      this.value = value;
-      this.left = null;
-      this.right = null;
-    }
-
-    insert(value) {
-      let currTree = this;
-
-      while (currTree) {
-        if (currTree.value <= value) {
-            if (!currTree.right) currTree.right = new BST(value);
-            currTree = currTree.right;
-        } else if (currTree.value > value) {
-            if (!currTree.left) currTree.left = new BST(value);
-            currTree = currTree.left;
-        }
+        this.value = value;
+        this.left = null;
+        this.right = null;
       }
 
-      return this;
-    }
+      insert(value) {
+        let currNode = this;
 
-    contains(value) {
-      let currTree = this;
-
-        while (currTree) {
-            if (currTree.value === value) {
-                return true;
-            } else if (currTree.value > value) {
-                currTree = currTree.left;
-            } else {
-                currTree = currTree.right;
-            }
-        }
-
-        return false;
-    }
-
-    remove(value, parentTree = null) {
-      let currTree = this;
-
-      while (currTree) {
-          if (currTree.value > value) {
-              parentTree = currTree;
-              currTree = currTree.left;
-          } else if (currTree.value < value) {
-              parentTree = currTree;
-              currTree = currTree.right;
-          } else {
-              if (currTree.left && currTree.right) {
-                  currTree.value = currTree.right.findSmallestVal();
-                  currTree.right.remove(currTree.value, currTree);
-              } else if (!parentTree) {
-                  if (currTree.left) {
-                      currTree.value = currTree.left.value;
-                      currTree.right = currTree.left.right;
-                      currTree.left = currTree.left.left;
-                  } else if (currTree.right) {
-                      currTree.value = currTree.right.value;
-                      currTree.left = currTree.right.left;
-                      currTree.right = currTree.right.right;
+              while (currNode !== null) {
+                  if (value < currNode.value) {
+                      if (currNode.left === null) {
+                          currNode.left = new BST(value);
+                          break;
+                      } else {
+                          currNode = currNode.left
+                      }
                   } else {
-                      currTree.value = null;
+                      if (currNode.right === null) {
+                          currNode.right = new BST(value);
+                          break;
+                      } else {
+                          currNode = currNode.right;
+                      }
                   }
-
-              } else if (parentTree.left === currTree){
-                  if (currTree.left) {
-                      parentTree.left = currTree.left;
-                  } else {
-                      parentTree.left = currTree.right;
-                  }
-              } else if (parentTree.right === currTree) {
-                if (currTree.left) {
-                    parentTree.right = currTree.left;
-                } else {
-                    parentTree.right = currTree.right;
-                }
               }
-          }
-          break
+        return this;
       }
-      return this;
-    }
 
-    findSmallestVal() {
+      contains(value) {
         let currTree = this;
 
-        while (currTree) {
-            currTree = currTree.left;
-        }
+          while (currTree !== null) {
+              if (value < currTree.value) {
+                  currTree = currTree.left;
+              } else if (value > currTree.value) {
+                  currTree = currTree.right;
+              } else {
+                  return true;
+              }
+          }
 
-        return currTree.value;
-    }
+          return false;
+      }
+
+      remove(value, parentTree = null) {
+        let currNode = this;
+
+        while (currNode !== null) {
+            if (value < currNode.value) {
+                parentTree = currNode;
+                currNode = currNode.left;
+            } else if (value > currNode.value) {
+                parentTree = currNode;
+                currNode = currNode.right;
+            } else {
+                if (currNode.left !== null && currNode.right !== null) {
+                    currNode.value = currNode.right.findSmallestVal();
+                    currNode.right.remove(currNode.value, currNode);
+                } else if (parentTree === null) {
+                    if (currNode.left !== null) {
+                        currNode.value = currNode.left.value;
+                        currNode.right = currNode.left.right;
+                        currNode.left = currNode.left.left;
+                    } else if (currNode.right !== null) {
+                        currNode.value = currNode.right.value;
+                        currNode.left = currNode.right.left;
+                        currNode.right = currNode.right.right;
+                    } else {
+                        currNode.value = null;
+                    }
+
+                } else if (parentTree.left === currNode){
+                    parentTree.left = currNode.left !== null ? currNode.left : currNode.right;
+                } else if (parentTree.right === currNode) {
+                       parentTree.left = currNode.left !== null ? currNode.left : currNode.right;
+                  break;
+                }
+            }
+        }
+        return this;
+      }
+
+      findSmallestVal() {
+          let currTree = this;
+
+          while (currTree.left !== null) {
+              currTree = currTree.left;
+          }
+
+          return currTree.value;
+      }
   }
 
