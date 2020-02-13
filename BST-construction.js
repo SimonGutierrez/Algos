@@ -76,9 +76,9 @@ class BST {
                 } else if (parentTree.left === currNode){
                     parentTree.left = currNode.left !== null ? currNode.left : currNode.right;
                 } else if (parentTree.right === currNode) {
-                       parentTree.left = currNode.left !== null ? currNode.left : currNode.right;
-                  break;
-                }
+                       parentTree.right = currNode.left !== null ? currNode.left : currNode.right;
+                    }
+                    break;
             }
         }
         return this;
