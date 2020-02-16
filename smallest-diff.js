@@ -1,39 +1,35 @@
 function smallestDifference(arrayOne, arrayTwo) {
-    arrayOne.sort((a, b) => a - b);
-    arrayTwo.sort((a, b) => a - b);
+	arrayOne.sort((a, b) => a - b);
+	arrayTwo.sort((a, b) => a - b);
 
-    let first = 0;
-    let second = 0;
-    let abs = Infinity;
-    let pair = [];
+	let smallest = Infinity;
+	let first = 0;
+	let second  = 0;
+	let pair = [];
 
-    while (typeof arrayOne[first] === 'number' && typeof arrayTwo[second] === 'number') {
-        let currAbs = Math.abs(arrayOne[first] - arrayTwo[second]);
+	while (first < arrayOne.length && second < arrayTwo.length) {
+		let firstNum = arrayOne[first];
+		let secondNum = arrayTwo[second];
+		let currAbs = Math.abs(firstNum - secondNum);
 
-        if (arrayOne[first] ===  arrayTwo[second]) {
-            pair = [arrayOne[first], arrayTwo[second]];
-            return pair;
-        }
+		if (currAbs === 0) {
+			return [firstNum, secondNum];
+		}
 
-        if (arrayOne[first] < arrayTwo[second]) {
-            if (currAbs < abs) {
-                abs = currAbs;
-                pair = [arrayOne[first], arrayTwo[second]]
-            }
-            first++;
-        }
+		if (firstNum < secondNum) {
+			first++;
+		} else {
+			second++;
+		}
 
-        if (arrayOne[first] > arrayTwo[second]) {
-            if (currAbs < abs) {
-                abs = currAbs;
-                pair = [arrayOne[first], arrayTwo[second]]
-            }
-            second++;
-        }
-    }
+		if (currAbs < smallest) {
+			smallest = currAbs;
+			pair = [firstNum, secondNum];
+		}
+	}
 
-    return pair;
-  }
+	return pair;
+}
 
   // Time: O(n*log(n) + m*log(m)) due to the sorting of the arrays, pointing doesnt affect the time.
   // Space: O(1);
