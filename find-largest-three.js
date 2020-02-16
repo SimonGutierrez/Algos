@@ -38,3 +38,26 @@ console.log(findThreeLargestNumbers([7, 7, 7, 7, 7, 7, 7, 7])) // [7, 7, 7]
 console.log(findThreeLargestNumbers([7, 7, 7, 8, 7, 7, 7])) // [7, 7, 8]
 console.log(findThreeLargestNumbers([141, 1, 17, -7, -17, -27, 18, 541, 8, 7, 7])) // [18, 141, 541]
 
+// Personal solution
+// function findThreeLargestNumbers(array) {
+// 	let first = -Infinity;
+// 	let second = -Infinity;
+// 	let third = -Infinity;
+
+// 	for (let i = 0; i < array.length; i++) {
+// 		let currNum = array[i];
+
+// 		if (currNum > third) {
+// 			first = second;
+// 			second = third;
+// 			third = currNum;
+// 		} else if (currNum > second) {
+// 			first = second;
+// 			second = currNum;
+// 		} else if (currNum > first) {
+// 			first = currNum;
+// 		}
+// 	}
+
+// 	return [first, second, third];
+// }
