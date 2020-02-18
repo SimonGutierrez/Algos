@@ -1,22 +1,21 @@
 function maxSubsetSumNoAdjacent(array) {
-    let maxSums = [];
-
-    for (let i = 0; i < array.length; i++) {
-        let currNum = array[i];
-
-        if (i <= 1) {
-            maxSums.push(currNum);
-        } else {
-            findMaxSums(maxSums, currNum);
-        }
+    if (!array.length) {
+        return 0;
+    } else if (array.length === 1) {
+        return array[0];
     }
 
-    return maxSums[maxSums.length - 1];
+    let second = array[0];
+    let first = Math.max(array[0], array[1]);
+
+    for (let i = 2; i < array.length; i++) {
+        let currSum = Math.max(first, second + array[i]);
+        second = first;
+        first = currSum;
+    }
+
+    return first;
   }
 
-function findMaxSums(array, nextNum) {
-    const currSum = array[array.length - 1];
-    const nextSum = array[array.length - 2] + nextNum;
-
-    currSum > nextSum ? array.push(currSum) : array.push(nextSum);
-}
+// Time : O(n) - where n is the number of elems in the array;
+// Space : O(1) - bc you are not storing any additional data just two variables;
