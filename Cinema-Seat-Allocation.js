@@ -14,6 +14,7 @@
 var maxNumberOfFamilies = function(n, reservedSeats) {
    let theater = [];
    let families = 0;
+   let isValidFam = 0;
    let currReservedSeat = 0;
    let row = 1;
    let column = 2;
@@ -25,9 +26,28 @@ var maxNumberOfFamilies = function(n, reservedSeats) {
 
    while (row <= theater.length) {
        let resrvdSeat = reservedSeats[currReservedSeat]
-       if ()
+
+       if (column === 10) {
+           column = 2;
+           row++;
+       }
+
+       if (isValidFam === 4) {
+           families++;
+           isValidFam = 0;
+       }
+
+       if (resrvdSeat[0] === row && resrvdSeat[1] === column) {
+           currReservedSeat++;
+           column++;
+           isValidFam = 0;
+       } else {
+           isValidFam++;
+           column++;
+       }
    }
 
+   return families;
 
 };
 
