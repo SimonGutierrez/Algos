@@ -12,6 +12,7 @@
 // example: families can be seated in 4-5-6-7, or 6-7-8-9 and 2-3-4-5 (exceptions)
 
 var maxNumberOfFamilies = function(n, reservedSeats) {
+    reservedSeats.sort((a,b) => a[0] - b[0]);
    let theater = [];
    let families = 0;
    let isValidFam = 0;
@@ -25,11 +26,23 @@ var maxNumberOfFamilies = function(n, reservedSeats) {
    }
 
    while (row <= theater.length) {
-       let resrvdSeat = reservedSeats[currReservedSeat]
+       let resrvdSeat = reservedSeats[currReservedSeat];
+       console.log('reserved seat', resrvdSeat);
 
        if (column === 10) {
            column = 2;
            row++;
+           isValidFam = 0;
+       }
+
+       if (resrvdSeat[0] === row && resrvdSeat[1] === column) {
+           column++;
+           currReservedSeat++;
+           isValidFam = 0;
+       } else {
+        // console.log('current column>>>:', column)
+           isValidFam++;
+           column++;
        }
 
        if (isValidFam === 4) {
@@ -37,18 +50,12 @@ var maxNumberOfFamilies = function(n, reservedSeats) {
            isValidFam = 0;
        }
 
-       if (resrvdSeat[0] === row && resrvdSeat[1] === column) {
-           currReservedSeat++;
-           column++;
-           isValidFam = 0;
-       } else {
-           isValidFam++;
-           column++;
-       }
    }
 
    return families;
-
 };
 
-console.log(maxNumberOfFamilies(3, [[1,2],[1,3],[1,8],[2,6],[3,1],[3,10]]));
+// console.log(maxNumberOfFamilies(3, [[1,2],[1,3],[1,8],[2,6],[3,1],[3,10]]));
+// console.log(maxNumberOfFamilies(2, [[2,1],[1,8],[2,6]]));
+console.log(maxNumberOfFamilies(4, [[4,3],[1,4],[4,6],[1,7]]));
+
