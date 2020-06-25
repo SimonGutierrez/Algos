@@ -13,46 +13,37 @@
 
 // eslint-disable-next-line complexity
 var maxNumberOfFamilies = function(n, reservedSeats) {
-    reservedSeats.sort((a,b) => a[0] - b[0]);
    let theater = [];
    let families = 0;
-   let isValidFam = 0;
-   let currReservedSeat = 0;
-   let row = 1;
-   let column = 2;
 
    // create the theater
    for (let i = 0; i < n; i++) {
        theater.push(new Array(10));
    }
+   // mark reserved seats in your theater
+   reservedSeats.forEach((seat) => {
+       let row = seat[0] - 1;
+       let column = seat[1] - 1;
 
-   while (row <= theater.length) {
-       let resrvdSeat = reservedSeats[currReservedSeat];
-       // when we get to column 10 reset our isvalid fam and move to the next row
-       if (column === 10) {
-           column = 2;
-           row++;
-           isValidFam = 0;
-       }
-       // since we always start at column 2 we need to skip over any reserved seats in column 1 so we can continue to progress down the rest of the reserved seats
-       if (resrvdSeat && resrvdSeat[1] === 1) {
-        currReservedSeat++;
-       }
-       // when we come across a reserved seat move to the next seat, move our pointer to the next reserved seat if there is one and reset out isvalid fam counter
-       if (resrvdSeat && resrvdSeat[0] === row && resrvdSeat[1] === column) {
-        // console.log('Row & column>>>:', [row, column])
-           column++;
-           currReservedSeat++;
-           isValidFam = 0;
-       } else {
-           isValidFam++;
-           column++;
-       }
-       // when we have seated a full fammily increase our family counter and reset our isvalidfam counter
-       if (isValidFam === 4) {
+       theater[row][column] = true;
+   });
+   // loop thorugh the theater and find how many families can fit by compairing two seats at a time;
+   for (let i = 0; i < theater.length; i++) {
+       let currRow = theater[i];
+       let leftPair1 = !currRow[1] && !currRow[2];
+       let rightPair1 = !currRow[3] && !currRow[4];
+       let leftPair2 = !currRow[5] && !currRow[6];
+       let rightPair2 = !currRow[7] && !currRow[8];
+
+       if (leftPair1 && rightPair1) {
            families++;
-           isValidFam = 0;
-        }
+           if (leftPair2 && rightPair2) {
+               families++
+           }
+       } else if (rightPair1 && leftPair2 || leftPair2 && rightPair2) {
+           families++;
+       }
+
    }
 
    return families;
@@ -62,3 +53,52 @@ console.log(maxNumberOfFamilies(3, [[1,2],[1,3],[1,8],[2,6],[3,1],[3,10]]));
 console.log(maxNumberOfFamilies(2, [[2,1],[1,8],[2,6]]));
 console.log(maxNumberOfFamilies(4, [[4,3],[1,4],[4,6],[1,7]]));
 
+// most optimal solution
+// var maxNumberOfFamilies2 = function(n, reservedSeats) {
+//     let map = new Map();
+
+// for (let i = 0; i < reservedSeats.length; i++) {
+
+//     let reserved;
+//     if (map.has(reservedSeats[i][0])) {
+
+//         reserved = map.get(reservedSeats[i][0]);
+//     } else {
+
+//         reserved = [];
+//         map.set(reservedSeats[i][0], reserved);
+//     }
+
+//     reserved[reservedSeats[i][1]] = true;
+// }
+
+// let seats = 0, groups = (n - map.size) * 2;
+
+// console.log('the map', map);
+
+// map.forEach((reserved, key) => {
+
+//     let leftAisle1 = !reserved[2] && !reserved[3];
+//     let rightAisle1 = !reserved[4] && !reserved[5];
+//     let leftAisle2 = !reserved[6] && !reserved[7];
+//     let rightAisle2 = !reserved[8] && !reserved[9];
+
+//     if (leftAisle1 && rightAisle1) {
+
+//         ++groups;
+
+//         if (leftAisle2 && rightAisle2) {
+
+//             ++groups;
+//         }
+//     } else if ((rightAisle1 && leftAisle2) || (leftAisle2 && rightAisle2)) {
+
+//         ++groups;
+//     }
+// });
+
+// return groups;
+
+// };
+
+// console.log(maxNumberOfFamilies2(3, [[1,2],[1,3],[1,8],[2,6],[3,1],[3,10]]));
