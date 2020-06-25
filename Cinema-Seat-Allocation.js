@@ -11,6 +11,7 @@
 // rules: families need to be sat together, exception families can be split in pairs of two if split by an aisle
 // example: families can be seated in 4-5-6-7, or 6-7-8-9 and 2-3-4-5 (exceptions)
 
+// eslint-disable-next-line complexity
 var maxNumberOfFamilies = function(n, reservedSeats) {
     reservedSeats.sort((a,b) => a[0] - b[0]);
    let theater = [];
@@ -27,14 +28,19 @@ var maxNumberOfFamilies = function(n, reservedSeats) {
 
    while (row <= theater.length) {
        let resrvdSeat = reservedSeats[currReservedSeat];
-
+       // when we get to column 10 reset our isvalid fam and move to the next row
        if (column === 10) {
            column = 2;
            row++;
            isValidFam = 0;
        }
-
+       // since we always start at column 2 we need to skip over any reserved seats in column 1 so we can continue to progress down the rest of the reserved seats
+       if (resrvdSeat && resrvdSeat[1] === 1) {
+        currReservedSeat++;
+       }
+       // when we come across a reserved seat move to the next seat, move our pointer to the next reserved seat if there is one and reset out isvalid fam counter
        if (resrvdSeat && resrvdSeat[0] === row && resrvdSeat[1] === column) {
+        // console.log('Row & column>>>:', [row, column])
            column++;
            currReservedSeat++;
            isValidFam = 0;
@@ -42,12 +48,11 @@ var maxNumberOfFamilies = function(n, reservedSeats) {
            isValidFam++;
            column++;
        }
-
+       // when we have seated a full fammily increase our family counter and reset our isvalidfam counter
        if (isValidFam === 4) {
            families++;
            isValidFam = 0;
-       }
-
+        }
    }
 
    return families;
