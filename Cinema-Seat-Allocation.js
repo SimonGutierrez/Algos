@@ -27,7 +27,7 @@ var maxNumberOfFamilies = function(n, reservedSeats) {
 
        theater[row][column] = true;
    });
-   // loop thorugh the theater and find how many families can fit by compairing two seats at a time;
+   // loop thorugh the theater and find how many families can fit per row by compairing two seats at a time;
    for (let i = 0; i < theater.length; i++) {
        let currRow = theater[i];
        let leftPair1 = !currRow[1] && !currRow[2];
@@ -43,7 +43,6 @@ var maxNumberOfFamilies = function(n, reservedSeats) {
        } else if (rightPair1 && leftPair2 || leftPair2 && rightPair2) {
            families++;
        }
-
    }
 
    return families;
