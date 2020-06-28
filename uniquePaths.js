@@ -6,42 +6,40 @@ const grid = [
   ]
 
 var uniquePathsWithObstacles = function(obstacleGrid) {
-    let row = 0;
-    let column = 0;
+    let row = 1;
+    let column = 1;
 
     if (obstacleGrid[0][0] === 1) {
         return 0;
     }
 
-    while (row < obstacleGrid.length) {
-        if (row === 0 && column === 0) {
-            while (column < obstacleGrid[0].length) {
-                if (obstacleGrid[0][column] !== 1) {
-                    obstacleGrid[0][column] = 1;
-                } else {
-                    obstacleGrid[0][column] = 0;
-                }
+    obstacleGrid[0][0] = 1;
 
-                column++;
-            }
-
-            row = 1;
-
-            while (row < obstacleGrid.length) {
-                if (obstacleGrid[row][0] !== 1) {
-                    obstacleGrid[row][0] = 1;
-                } else {
-                    obstacleGrid[row][0] = 0;
-                }
-
-                row++;
-            }
-
-            column = 1;
-            row = 1;
-
+    while (column < obstacleGrid[0].length) {
+        if (obstacleGrid[0][column] !== 1) {
+            obstacleGrid[0][column] = 1;
+        } else {
+            obstacleGrid[0][column] = 0;
         }
 
+        column++;
+    }
+
+    while (row < obstacleGrid.length) {
+        if (obstacleGrid[row][0] !== 1) {
+            obstacleGrid[row][0] = 1;
+        } else {
+            obstacleGrid[row][0] = 0;
+        }
+
+        row++;
+    }
+
+    column = 1;
+    row = 1;
+
+
+    while (row < obstacleGrid.length) {
         while (column < obstacleGrid[row].length) {
             if (obstacleGrid[row][column] !== 1) {
                 obstacleGrid[row][column] = obstacleGrid[row - 1][column] + obstacleGrid[row][column - 1];
@@ -54,7 +52,7 @@ var uniquePathsWithObstacles = function(obstacleGrid) {
         column = 1;
         row++;
     }
-    column = obstacleGrid[row - 1].length - 1;
+    column = obstacleGrid[0].length - 1;
 
     return obstacleGrid[row - 1][column];
 
