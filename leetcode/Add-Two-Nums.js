@@ -1,11 +1,5 @@
 /* eslint-disable complexity */
 /* eslint-disable max-statements */
-// class Node {
-//     constructor(value, next) {
-//       this.value = value;
-//       this.next = next;
-//     }
-//   }
 
 function ListNode(val, next) {
     this.val = (val === undefined ? 0 : val);
