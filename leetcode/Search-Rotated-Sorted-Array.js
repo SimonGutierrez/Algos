@@ -29,6 +29,9 @@ var search = function(nums, target) {
     return false;
 };
 
+// Time: O(log(n)) your are looking at things 1/2 at a time;
+// Space: O(1) no additional space was used;
+
 console.log(search([2, 5, 6, 0, 0, 1, 2], 0)); // true;
 console.log(search([4, 5, 6, 7, 1, 2, 3, 4], 6)); // true;
 console.log(search([1, 1, 3], 3)); // true;
