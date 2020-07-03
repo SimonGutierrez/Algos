@@ -46,6 +46,9 @@ var addTwoNumbers2 = function(l1, l2) {
     return head.next;
 };
 
+// Time: O(MAX(M,N)) where M and N are the lengths of the two linked lists the longer list will be how many items we look at;
+// Space: O(MAX(M,N)) the new list will be as long as the longest of list M or N;
+
 console.log('linked list', addTwoNumbers2(linkedList1, linkedList2)); // [1, 8]
 console.log('linked list', addTwoNumbers2(linkedList3, linkedList4)); // [0, 0 , 1]
 console.log('linked list', addTwoNumbers2(linkedList5, linkedList5)); // [0, 1]
