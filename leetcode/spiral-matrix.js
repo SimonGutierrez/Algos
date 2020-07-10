@@ -15,84 +15,43 @@ let matrix2 = [
    ]
 
 let matrix3 = [
-    [0]
+    []
   ]
 
-var spiralOrder = function(matrix) {
+const spiralOrder2 = (matrix) => {
+    if (matrix.length === 0) return [];
+
     let map = new Map();
+    let endRow = matrix.length;
+    let endCol = matrix[0].length;
     let row = 0;
     let col = 0;
-    let right = true;
-    let down = false;
-    let left = false;
-    let up = false;
+    let dir = 0;
+    const possibleRowDir  = [0, 1, 0, -1];
+    const possibleColDir = [1, 0, -1, 0];
 
-    for (let i = 0; i < (matrix.length * matrix[0].length) - 1; i++) {
-        if (right) {
-            if (map.has(`${row}, ${col}`)) {
-                right = false;
-                down = true;
-                col--;
-                row++;
-            } else if  (col === matrix[0].length - 1) {
-                map.set(`${row}, ${col}`, matrix[row][col]);
-                right = false;
-                down = true;
-                row++;
-            } else {
-                map.set(`${row}, ${col}`, matrix[row][col]);
-                col++;
-                }
-            }
-        if (down) {
-            if (map.has(`${row}, ${col}`)) {
-                down = false;
-                left = true;
-                row--;
-                col--;
-            } else if  (row === matrix.length - 1) {
-                map.set(`${row}, ${col}`, matrix[row][col]);
-                down = false;
-                left = true;
-                col--;
-            } else {
-                map.set(`${row}, ${col}`, matrix[row][col]);
-                row++;
-                }
-            }
-        if (left) {
-            if (map.has(`${row}, ${col}`)) {
-                left = false;
-                up = true;
-                col++;
-                row--;
-            } else if  (col === 0) {
-                map.set(`${row}, ${col}`, matrix[row][col]);
-                left = false;
-                up = true;
-                row--;
-            } else {
-                map.set(`${row}, ${col}`, matrix[row][col]);
-                col--;
-                }
-            }
-        if (up) {
-            if (map.has(`${row}, ${col}`)) {
-                up = false;
-                right = true;
-                row++;
-                col++;
-            } else {
-                map.set(`${row}, ${col}`, matrix[row][col]);
-                row--;
-                }
-            }
+    for (let i = 0; i < endRow * endCol; i++) {
+        map.set(`${row}, ${col}`, matrix[row][col]);
+        let currRow = row + possibleRowDir[dir];
+        let currCol = col + possibleColDir[dir];
+
+        if (!map.has(`${currRow}, ${currCol}`) && 0 <= currRow && currRow < endRow && 0 <= currCol && currCol < endCol) {
+            row += possibleRowDir[dir];
+            col += possibleColDir[dir];
+        } else {
+            dir = (dir + 1) % 4;
+            row += possibleRowDir[dir];
+            col += possibleColDir[dir];
+        }
     }
 
     return [...map.values()];
-};
+}
 
-// console.log(spiralOrder(matrix1)); // [ 1, 2, 3, 4, 8, 12, 16, 20, 19, 18, 17, 13, 9, 5, 6, 7, 11, 15, 14, 10 ]
-// console.log(spiralOrder(matrix2)); // [ 1, 2, 3, 6, 9, 8, 7, 4, 5 ]
-console.log(spiralOrder(matrix3)); // [ 1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7 ]
+// Time: O(N) where N is the total number of elements in the matrix
+// Space: O(N) where N is the number of elements saved in the map, i.e the number of elems in the matrix
+
+console.log(spiralOrder2(matrix1)); // [ 1, 2, 3, 4, 8, 12, 16, 20, 19, 18, 17, 13, 9, 5, 6, 7, 11, 15, 14, 10 ]
+console.log(spiralOrder2(matrix2)); // [ 1, 2, 3, 6, 9, 8, 7, 4, 5 ]
+console.log(spiralOrder2(matrix3)); // [ ]
 
