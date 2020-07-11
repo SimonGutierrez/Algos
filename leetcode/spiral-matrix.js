@@ -22,11 +22,8 @@ const spiralOrder2 = (matrix) => {
     if (matrix.length === 0) return [];
 
     let map = new Map();
-    let endRow = matrix.length;
-    let endCol = matrix[0].length;
-    let row = 0;
-    let col = 0;
-    let dir = 0;
+    let endRow = matrix.length, endCol = matrix[0].length;
+    let row = 0, col = 0, dir = 0;
     const possibleRowDir  = [0, 1, 0, -1];
     const possibleColDir = [1, 0, -1, 0];
 
