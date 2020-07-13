@@ -29,10 +29,10 @@ const spiralOrder2 = (matrix) => {
 
     for (let i = 0; i < endRow * endCol; i++) {
         map.set(`${row}, ${col}`, matrix[row][col]);
-        let currRow = row + possibleRowDir[dir];
-        let currCol = col + possibleColDir[dir];
+        let nextRow = row + possibleRowDir[dir];
+        let nextCol = col + possibleColDir[dir];
 
-        if (!map.has(`${currRow}, ${currCol}`) && 0 <= currRow && currRow < endRow && 0 <= currCol && currCol < endCol) {
+        if (!map.has(`${nextRow}, ${nextCol}`) && 0 <= nextRow && nextRow < endRow && 0 <= nextCol && nextCol < endCol) {
             row += possibleRowDir[dir];
             col += possibleColDir[dir];
         } else {
