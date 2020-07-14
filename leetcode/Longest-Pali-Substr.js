@@ -1,3 +1,4 @@
+// expand around center solution
 const longestPalindrome = (s) => {
     if (s.length === 0 || s === null) return '';
     let max = '';
@@ -24,6 +25,9 @@ const longestPalindrome = (s) => {
     }
     return max;
 };
+
+// Time: O(N^2) double loop for finding longest sub str
+// Space: O(1) no additional space used
 
 console.log(longestPalindrome('sabbad')) // abba
 console.log(longestPalindrome('thetacocat')) // tacocat
