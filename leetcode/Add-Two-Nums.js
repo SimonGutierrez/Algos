@@ -42,6 +42,7 @@ var addTwoNumbers4 = function(l1, l2) {
 
 // Time: O(MAX(M,N)) where M and N are the lengths of the two linked lists the longer list will be how many items we look at;
 // Space: O(MAX(M,N)) the new list will be as long as the longest of list M or N;
+// Num Times Practiced = 1;
 
 console.log('linked list', addTwoNumbers4(linkedList1, linkedList2)); // [1, 8]
 console.log('linked list', addTwoNumbers4(linkedList3, linkedList4)); // [0, 0 , 1]

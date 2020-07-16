@@ -98,6 +98,7 @@ var uniquePathsWithObstacles = function(obstacleGrid) {
 
 // Time: O(M×N) M is the length of a row and N is the length of a colummn;
 // Space: O(1) no additional space is allocated;
+// Num Times Practiced = 1;
 
 console.log(uniquePathsWithObstacles(grid)); // 0
 console.log(uniquePathsWithObstacles(grid2)); // 2

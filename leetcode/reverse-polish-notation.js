@@ -94,6 +94,8 @@ function isValid(subArray) {
     }
 }
 
+// Num Times Practiced = 1;
+
 console.log(evalRPN(example4)); // 22
 console.log(evalRPN(example3)); // 6
 console.log(evalRPN(example2)); // 9

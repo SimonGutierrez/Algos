@@ -34,6 +34,7 @@ SubrectangleQueries.prototype.getRectangle = function() {
 
 // Time: O(M*N) where rows between our start and end points in our sub array are M and the length of our columns is our N;
 // Space: O(1) no additional space was allocated;
+// Num Times Practiced = 1;
 
 
 const newRectangle = new SubrectangleQueries(rectangle1);

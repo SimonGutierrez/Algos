@@ -31,6 +31,7 @@ var search = function(nums, target) {
 
 // Time: O(log(n)) your are looking at things 1/2 at a time;
 // Space: O(1) no additional space was used;
+// Num Times Practiced = 1;
 
 console.log(search([2, 5, 6, 0, 0, 1, 2], 0)); // true;
 console.log(search([4, 5, 6, 7, 1, 2, 3, 4], 6)); // true;

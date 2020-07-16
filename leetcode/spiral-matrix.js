@@ -47,6 +47,7 @@ const spiralOrder2 = (matrix) => {
 
 // Time: O(N) where N is the total number of elements in the matrix
 // Space: O(N) where N is the number of elements saved in the map, i.e the number of elems in the matrix
+// Num Times Practiced = 1;
 
 console.log(spiralOrder2(matrix1)); // [ 1, 2, 3, 4, 8, 12, 16, 20, 19, 18, 17, 13, 9, 5, 6, 7, 11, 15, 14, 10 ]
 console.log(spiralOrder2(matrix2)); // [ 1, 2, 3, 6, 9, 8, 7, 4, 5 ]

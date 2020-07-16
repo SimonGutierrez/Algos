@@ -28,6 +28,7 @@ const longestPalindrome = (s) => {
 
 // Time: O(N^2) double loop for finding longest sub str
 // Space: O(1) no additional space used
+// Num Times Practiced = 1;
 
 console.log(longestPalindrome('sabbad')) // abba
 console.log(longestPalindrome('thetacocat')) // tacocat
