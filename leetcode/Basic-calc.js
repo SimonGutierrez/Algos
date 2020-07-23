@@ -1,52 +1,37 @@
 /* eslint-disable complexity */
 // PEMDAS
-const calculate = (s) => {
+const calculate1 = (s) => {
     if (s.length === 1) return Number(s);
-    let dict = {
-        '+': 2,
-        '-': 1,
-        '*': 4,
-        '/': 3
-    };
-    let nums = [];
-    let operator = [];
-    let substr = '';
+    s.replace(/\s/g, ''); // remove all white spaces
+    let num = '';
+    let calc = []; // your stack
+    let prevSign = '+';
 
-    for (let i = s.length - 1; i >= 0; i--) {
-        if (nums.length === 2 || i === 0) {
-            let num2 = Number(nums.pop());
-            let num1 = i === 0 ? Number(s[i] + substr) : Number(nums.pop());
-            let op = operator.pop();
-            num2 ? nums.push(helper(num1, op, num2)) : nums.push(num1);
-       } else if (Number(s[i]) || Number(s[i]) === 0) {
-            if (dict[s[i - 1]]) {
-                substr = s[i] + substr;
-                nums.unshift(Number(substr));
-                substr = '';
-                operator.unshift(s[i - 1]);
-            } else {
-                substr = s[i] + substr;
-            }
-            console.log('oper', operator)
+    for (let i = 0; i < s.length; i++) {
+        let char = s[i];
+       if (!isNaN(char)) num += char;
+
+       if (isNaN(char) || i === s.length - 1) {
+           // store nums in stack and only pop when mult or div is done;
+           if (prevSign === '+') {
+               calc.push(Number(num));
+           } else if (prevSign === '-') {
+               calc.push(Number(-num));
+           } else if (prevSign === '*') {
+               calc.push(Math.floor(calc.pop() * num));
+           } else if (prevSign === '/') {
+               calc.push(Math.trunc(calc.pop() / num));
+           }
+
+           prevSign = char;
+           num = '';
+       }
+
     }
+    // sum up all the numbers in our stack at the end;
+    return calc.reduce((a, b) => a + b);
 }
 
-    return nums[0] < 0 ? nums[0] * -1 :  nums[0];
-}
-
-const helper = (num1, op, num2) => {
-    if (op === '+') {
-        return num1 + num2;
-    } else if (op === '-') {
-        return num1 - num2;
-    } else if (op === '*') {
-        return num1 * num2;
-    } else {
-        return Math.trunc(num1 / num2);
-    }
-}
-
-// white spaces!
-console.log(calculate('10 / 5 + 1 - 10 * 6')) // -57
-// nums = 10, 5, 1, 10, 6
-// op = /, +, -, *
+console.log(calculate1('2048')) // 2048
+console.log(calculate1('3+5 / 2 ')) // 5
+console.log(calculate1('"3+2*2')) // 7
