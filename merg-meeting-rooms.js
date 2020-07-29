@@ -13,13 +13,31 @@ Write a function mergeRanges() that takes an array of multiple meeting time rang
 */
 
 const mergeRanges = (meetings) => {
+    meetings.sort((a, b) => a.startTime - b.startTime);
+    let result = [meetings[0]];
+
+    for (let i = 1; i < meetings.length; i++) {
+        let prev = result[result.length - 1];
+        let curr = meetings[i];
+
+        if (prev.endTime >= curr.startTime) {
+            result[result.length - 1] = {
+                startTime: Math.min(prev.startTime, curr.startTime),
+                endTime: Math.max(prev.endTime, curr.endTime)
+            }
+        } else {
+            result.push(curr);
+        }
+    }
+
+    return result;
 }
 
 console.log(mergeRanges([{ startTime: 5, endTime: 6 }, { startTime: 6, endTime: 8 }])); // [{ startTime: 5, endTime: 8 }]
 console.log(mergeRanges([{ startTime: 1, endTime: 3 }, { startTime: 4, endTime: 8 }])); // [{ startTime: 1, endTime: 3 }, { startTime: 4, endTime: 8 }]
 console.log(mergeRanges([
     { startTime: 1, endTime: 4 },
-    { startTime: 2, endTime: 5 },
     { startTime: 5, endTime: 8 },
+    { startTime: 2, endTime: 5 },
   ])); // [{ startTime: 1, endTime: 8 }]
 
