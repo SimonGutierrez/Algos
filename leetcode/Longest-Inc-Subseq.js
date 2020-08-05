@@ -7,8 +7,8 @@ const LIS = (nums) => {
     for (let i = 0; i < nums.length; i++) {
         let j = 0;
         while (j < i) {
-            if (nums[j] < nums[i]) {
-                if (dpChart[i] <= dpChart[j]) dpChart[i] = dpChart[j] + 1;
+            if (nums[j] < nums[i] && dpChart[i] <= dpChart[j]) {
+                dpChart[i] = dpChart[j] + 1;
             }
             j++;
         }
