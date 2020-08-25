@@ -37,7 +37,31 @@ Explanation: The 1st 1 in friend's guess is a bull, the 2nd or 3rd 1 is a cow.
 */
 
 const bullsAndCows = (secret, guess) => {
+    let bulls = 0;
+    let cows = 0;
+    let memo = {};
 
+    for (let i = 0; i < secret.length; i++) {
+        if (memo[secret[i]]) {
+            memo[secret[i]] = memo[secret[i]] + 1;
+        } else {
+            memo[secret[i]] = 1;
+        }
+    }
+
+    for (let j = 0; j < guess.length; j++) {
+        if (typeof memo[guess[j]] === 'number') {
+            if (secret[j] === guess[j]) {
+                if (memo[guess[j]] <= 0) cows--;
+                bulls++;
+            } else {
+                cows++;
+            }
+            memo[guess[j]] = memo[guess[j]] - 1;
+        }
+    }
+
+    return `${bulls}A${cows}B`;
 }
 
 console.log(bullsAndCows('1807', '7810')); // 1A3B
