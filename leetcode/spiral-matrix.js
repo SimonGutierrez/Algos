@@ -1,5 +1,8 @@
 /* eslint-disable complexity */
 /* eslint-disable max-statements */
+
+// Leet Code Link https://leetcode.com/problems/spiral-matrix/
+
 let matrix1 = [
     [1, 2, 3, 4],
     [5, 6, 7, 8],
@@ -8,6 +11,15 @@ let matrix1 = [
     [17, 18, 19, 20],
   ]
 
+/*
+        1 -> 2 -> 3
+                  |
+                  v
+        4 -> 5    6
+        ^         |
+        |         v
+        7 <- 8 <- 9
+*/
 let matrix2 = [
     [ 1, 2, 3 ],
     [ 4, 5, 6 ],
