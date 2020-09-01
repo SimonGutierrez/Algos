@@ -32,6 +32,38 @@ const calculate1 = (s) => {
     return calc.reduce((a, b) => a + b);
 }
 
-console.log(calculate1('2048')) // 2048
-console.log(calculate1('3+5 / 2 ')) // 5
-console.log(calculate1('"3+2*2')) // 7
+// console.log(calculate1('2048')) // 2048
+// console.log(calculate1('3+5 / 2 ')) // 5
+
+const calculate = (s) => {
+    if (s.length === 1) return Number(s);
+    let newString = s.replace(/\s/g, ''); // remove all white spaces
+    let stack = [], prevOperator = '+', currNum = '';
+
+    for (let i = 0; i < newString.length; i++) {
+        let elem = newString[i];
+        if (!isNaN(elem)) currNum += elem;
+
+        if (isNaN(elem) || i === newString.length - 1) {
+            if (prevOperator === '*') {
+            stack.push(Math.floor(stack.pop() * Number(currNum)));
+            } else if (prevOperator === '/') {
+            stack.push(Math.trunc(stack.pop() / Number(currNum)));
+            } else if (prevOperator === '+') {
+            stack.push(Number(currNum));
+            } else if (prevOperator === '-') {
+            stack.push(Number(-currNum));
+            }
+
+            prevOperator = elem;
+            currNum = '';
+        }
+    }
+
+    return stack.reduce((a, b) => a + b);
+};
+
+console.log(calculate('"3+2*2')) // 7
+
+console.log(calculate('2048')) // 2048
+console.log(calculate('3+5 / 2 ')) // 5

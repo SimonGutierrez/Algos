@@ -51,6 +51,6 @@ function validNeighbor(image, row, col, originalColor) {
 }
 
 // Time = O(n) where n are all elements in the 2D array;
-// Space = O(n) use of stack all points in the 2D array;
+// Space = O(n) use of stack to store all points in the 2D array;
 
 console.log(floodFill([[0, 0, 0], [0, 0, 0]], 1, 0, 2)); // [ [ 2, 2, 2 ], [ 2, 2, 2 ] ]
