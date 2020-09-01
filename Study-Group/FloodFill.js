@@ -17,5 +17,37 @@ to the starting pixel.
 */
 
 const floodFill = (image, sr, sc, newColor) => {
+    const originalColor = image[sr][sc];
 
+    if (originalColor === newColor) return image;
+
+    let stack = [[sr, sc]];
+    const possibleRowDir = [0, 1, 0, -1];
+    const possibleColDir = [1, 0, -1, 0];
+
+    while (stack.length) {
+        let [row, col] = stack.pop();
+        image[row][col] = newColor;
+        for (let i = 0; i < 4; i++) {
+            let newRow = row + possibleRowDir[i];
+            let newCol = col + possibleColDir[i];
+            if (validNeighbor(image, newRow, newCol, originalColor)) {
+                stack.push([newRow, newCol]);
+            }
+        }
+    }
+
+    return image;
 }
+
+function validNeighbor(image, row, col, originalColor) {
+    if (row < image.length && row >= 0 && col < image[0].length && col >= 0) {
+        if (image[row][col] === originalColor) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+console.log(floodFill([[0, 0, 0], [0, 0, 0]], 1, 0, 2));
