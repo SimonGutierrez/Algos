@@ -1,5 +1,11 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable complexity */
+/*
+eslint-disable complexity
+Leet code Link: https://leetcode.com/problems/basic-calculator-ii/submissions/
+*/
 // PEMDAS
+
 const calculate1 = (s) => {
     if (s.length === 1) return Number(s);
     s.replace(/\s/g, ''); // remove all white spaces
