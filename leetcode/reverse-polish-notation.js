@@ -94,7 +94,29 @@ function isValid(subArray) {
     }
 }
 
-// Num Times Practiced = 1;
+// Num Times Practiced = 2;
+
+// second leet code attempt
+
+const evalRPN = (tokens) => {
+    let stack = [];
+
+    for (let i = 0; i < tokens.length; i++) {
+        let elem = tokens[i];
+        if (Number(elem) || elem === '0') {
+           stack.push(elem);
+        } else {
+            let second = stack.pop();
+            let first = stack.pop();
+            if (elem === '+') stack.push(Number(first) + Number(second));
+            if (elem === '-') stack.push(Number(first) - Number(second));
+            if (elem === '*') stack.push(Number(first) * Number(second));
+            if (elem === '/') stack.push(Math.trunc(Number(first) / Number(second)));
+        }
+    }
+
+    return stack[0];
+};
 
 console.log(evalRPN(example4)); // 22
 console.log(evalRPN(example3)); // 6
