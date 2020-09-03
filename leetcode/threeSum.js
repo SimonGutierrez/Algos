@@ -1,5 +1,8 @@
 /* eslint-disable complexity */
-const threeSum  = (nums) => {
+// Leet code Link: https://leetcode.com/problems/3sum/
+// Num Times Practiced = 2;
+
+const threeSum = (nums) => {
     if (nums.length < 3) return [];
 
     nums.sort((a, b) => a - b);
@@ -35,7 +38,34 @@ const threeSum  = (nums) => {
     return result;
 }
 
-// Num Times Practiced = 1;
+// Second attempt
 
-console.log(threeSum([-1, 0, 1, 2, -1, -4])); //  [ -1, -1, 2 ], [ -1, 0, 1 ] ]
-console.log(threeSum([0, 0, 0, 0, 0, 0])); // [ [ 0, 0, 0 ] ]
+const threeSum2 = (nums) => {
+    nums.sort((a, b) => a - b);
+    let solutionSet = [];
+
+    for (let i = 0; i < nums.length; i++) {
+        let mid = i + 1;
+        let right = nums.length - 1;
+
+        while (mid < right) {
+            if (nums[i] + nums[mid] + nums[right] === 0) {
+                solutionSet.push([nums[i], nums[mid], nums[right]]);
+                while (nums[mid] === nums[mid + 1]) mid++;
+                while (nums[right] === nums[right - 1]) right--;
+                mid++;
+                right--;
+            } else if (nums[i] + nums[mid] + nums[right] < 0) {
+                mid++;
+            } else {
+                right--;
+            }
+        }
+        while (nums[i] === nums[i + 1]) i++;
+    }
+
+    return solutionSet;
+};
+
+console.log(threeSum2([-1, 0, 1, 2, -1, -4])); //  [ -1, -1, 2 ], [ -1, 0, 1 ] ]
+console.log(threeSum2([0, 0, 0, 0, 0, 0])); // [ [ 0, 0, 0 ] ]
