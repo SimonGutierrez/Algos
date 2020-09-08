@@ -70,4 +70,4 @@ const killProcess = (ppid, pid, kill) => {
     const kill = 5
 
 
-    console.log(killProcess(ppid, pid, kill))
+    console.log(killProcess(ppid, pid, kill)) // [5, 10, 6]
