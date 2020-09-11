@@ -5,7 +5,7 @@ class Node {
     }
 }
 
-class Stack { // FILO
+class Stack { // LIFO
     constructor() {
         this.top = null;
     }
