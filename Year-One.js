@@ -5,15 +5,13 @@ turn this: [
  ['67', 'Algebra'],
  ['58', 'Science'],
  ['63', 'Science'],
- ['54', 'Religon']
 ]
 
  into this:
  {
      '58, 63': ['Science'],
      '58, 67': ['Algebra'],
-     '63, 54': [],
-     ...
+     '63, 67': [],
  }
 
  Match each student if they are taking the same class, if no classes match then [];
@@ -53,7 +51,6 @@ turn this: [
     ['67', 'Algebra'],
     ['58', 'Science'],
     ['63', 'Science'],
-    ['54', 'Religon']
    ]
 
 console.log(findStudents(students1))
@@ -62,6 +59,5 @@ console.log(findStudents(students1))
     '58, 63': ['Science'],
     '58, 67': ['Algebra'],
     '63, 54': [],
-    ...
 }
 */
