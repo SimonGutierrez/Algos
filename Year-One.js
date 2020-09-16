@@ -24,9 +24,10 @@ turn this: [
 
     for (let student of students) {
         if (studentBank[student[0]]) {
-            studentBank[student[0]].push(student[1]);
+            studentBank[student[0]].add(student[1]);
         } else {
-            studentBank[student[0]] = [student[1]];
+            studentBank[student[0]] = new Set();
+            studentBank[student[0]].add(student[1]);
         }
     }
 
@@ -35,9 +36,12 @@ turn this: [
     for (let i = 0; i < studentsList.length - 1; i++) {
         let key1 = studentsList[i];
         for (let j = i + 1; j < studentsList.length; j++) {
+            let newSet = [];
             let key2 = studentsList[j];
-
-            result[`${key1}, ${key2}`] = studentBank[key1].filter(currClass => studentBank[key2].includes(currClass))
+            studentBank[key1].forEach((currClass) => {
+                if (studentBank[key2].has(currClass)) newSet.push(currClass);
+            })
+            result[`${key1}, ${key2}`] = newSet;
         }
     }
 
