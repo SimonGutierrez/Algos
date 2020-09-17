@@ -21,28 +21,29 @@ turn this: [
  const findStudents = (students) => {
     let studentBank = {};
     let result = {};
-    // [student, clases]
-    for (let student of students) {
-        if (studentBank[student[0]]) {
-            studentBank[student[0]].add(student[1]);
+
+    for (let [student, course] of students) {
+        if (studentBank[student]) {
+            studentBank[student].add(course);
         } else {
-            studentBank[student[0]] = new Set();
-            studentBank[student[0]].add(student[1]);
+            studentBank[student] = new Set();
+            studentBank[student].add(course);
         }
     }
 
     let studentsList = Object.keys(studentBank);
 
     for (let i = 0; i < studentsList.length - 1; i++) {
-        let key1 = studentsList[i];
+        let student1 = studentsList[i];
         for (let j = i + 1; j < studentsList.length; j++) {
-            let newSet = [];
-            let key2 = studentsList[j];
-            studentBank[key1].forEach((currClass) => {
-                if (studentBank[key2].has(currClass)) newSet.push(currClass);
+            let filteredCourses = [];
+            let student2 = studentsList[j];
+
+            studentBank[student1].forEach((currClass) => {
+                if (studentBank[student2].has(currClass)) filteredCourses.push(currClass);
             })
 
-            result[`${key1}, ${key2}`] = newSet;
+            result[`${student1}, ${student2}`] = filteredCourses;
         }
     }
 
@@ -54,12 +55,12 @@ turn this: [
     ['58', 'Algebra'],
     ['63', 'History'],
     ['67', 'Algebra'],
-    ['67', 'Science'],
     ['58', 'Science'],
     ['63', 'Science'],
    ]
 
 console.log(findStudents(students1))
+
 /*
 {
     '58, 63': ['Science'],
