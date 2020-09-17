@@ -16,9 +16,9 @@ const thirdMax = (nums) => {
 
 
 const nums1 = [2, 2, 3, 1];
-const nums2 = [5, 2, 2]
+const nums2 = [5, 2, 2];
 const nums3 = [1, 2, 2, 5, 3, 5];
 
 console.log(thirdMax(nums1)); // 1
-console.log(thirdMax(nums2)); //
+console.log(thirdMax(nums2)); // 5
 console.log(thirdMax(nums3)); // 2
