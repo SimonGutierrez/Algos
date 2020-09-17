@@ -65,7 +65,6 @@ const addTwoNumbers2 = (l1, l2) => {
         tail = tail.next;
         currL1 = currL1 ? currL1.next : null;
         currL2 = currL2 ? currL2.next : null;
-
     }
 
     if (carry) tail.next = new ListNode(carry);

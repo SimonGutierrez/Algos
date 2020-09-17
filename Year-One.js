@@ -21,7 +21,7 @@ turn this: [
  const findStudents = (students) => {
     let studentBank = {};
     let result = {};
-
+    // [student, clases]
     for (let student of students) {
         if (studentBank[student[0]]) {
             studentBank[student[0]].add(student[1]);
@@ -41,6 +41,7 @@ turn this: [
             studentBank[key1].forEach((currClass) => {
                 if (studentBank[key2].has(currClass)) newSet.push(currClass);
             })
+
             result[`${key1}, ${key2}`] = newSet;
         }
     }
@@ -53,6 +54,7 @@ turn this: [
     ['58', 'Algebra'],
     ['63', 'History'],
     ['67', 'Algebra'],
+    ['67', 'Science'],
     ['58', 'Science'],
     ['63', 'Science'],
    ]
