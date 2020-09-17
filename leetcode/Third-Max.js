@@ -1,17 +1,18 @@
 // leetCode Link: https://leetcode.com/problems/third-maximum-number/
 
 const thirdMax = (nums) => {
-  let maximums = new Set();
+    let set = new Set();
 
-  for (let num of nums) {
-    maximums.add(num);
-    if (maximums.size > 3) {
-      maximums.delete(Math.min(...maximums))
+    for (let num of nums) {
+        set.add(num);
+
+        if (set.size > 3) {
+            let min = Math.min(...set);
+            set.delete(min);
+        }
     }
-  }
 
-  if (maximums.size === 3) return Math.min(...maximums);
-    return Math.max(...maximums)
+    return set.size < 3 ? Math.max(...set) : Math.min(...set);
 }
 
 
