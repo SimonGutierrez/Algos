@@ -1,6 +1,5 @@
 // leet code link: https://leetcode.com/problems/climbing-stairs/
 
-
 // when you can only take 1 or 2 steps at a time
 const climbStairs2 = (n) => {
     if (n === 1) return 1;
