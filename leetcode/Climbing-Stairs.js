@@ -33,6 +33,8 @@ const climbStairs3 = (n) => {
     return numsArray[n]
 };
 
+// Time = O(n) depending on how many stairs you need to climb;
+// Space = O(n) our array has the same number of elems as stairs;
 
-// console.log(climbStairs3(4)) // 7
-// console.log(climbStairs3(3)) // 4
+console.log(climbStairs3(4)) // 7
+console.log(climbStairs3(3)) // 4
