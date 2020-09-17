@@ -1,2 +1,5 @@
 # ignore Pinterest 
 *Pinterest.js
+
+# ignore package json
+*.json

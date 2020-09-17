@@ -33,72 +33,27 @@ const grid3 = [
     [0, 0]
 ]
 
-// eslint-disable-next-line max-statements
 var uniquePathsWithObstacles = function(obstacleGrid) {
-    let row = 1;
-    let column = 1;
+    // if our first cell has an obstacle no ways to get to end point
+    if (obstacleGrid[0][0] === 1) return 0;
 
-    // is there an obstacle at our starting point
-    if (obstacleGrid[0][0] === 1) {
-        return 0;
+    const rows = obstacleGrid.length;
+    const cols = obstacleGrid[0].length;
+    // loop through the first row/col and switch all 0s to 1s and 1s to 0s; !! - we only mark a path valid if its prev is not a 0 meaning there are no obstacles - !!
+    for (let i = 0; i < cols; i++) obstacleGrid[0][i] = obstacleGrid[0][i] === 1 || obstacleGrid[0][i - 1] === 0 ? 0 : 1;
+
+    for (let k = 1; k < rows; k++) obstacleGrid[k][0] = obstacleGrid[k][0] === 1 || obstacleGrid[k - 1][0] === 0 ? 0 : 1;
+    // loop through the rest of the grid starting at [1, 1] adding up vals on top of curr cell and to its left;
+    for (let j = 1; j < rows; j++) {
+        for (let m = 1; m < cols; m++) obstacleGrid[j][m] = obstacleGrid[j][m] === 0 ? obstacleGrid[j - 1][m] + obstacleGrid[j][m - 1] : 0;
     }
-    // mark our starting point as a path
-    obstacleGrid[0][0] = 1;
-    // is our first row clear with no obstacles?
-    let clearPathRow = true;
-    while (column < obstacleGrid[0].length) {
-        // if there is no obstacle mark it as a possible path by changing it to 1;
-        if (obstacleGrid[0][column] !== 1 && clearPathRow) {
-            obstacleGrid[0][column] = 1;
-        } else {
-        // if there is an obstacle do not include it as a posslible path by changing it to 0;
-            obstacleGrid[0][column] = 0;
-        // if we come across an obstacle in the first row our path is no longer clear so we update it to false;
-            clearPathRow = false;
-
-        }
-        column++;
-    }
-
-    let clearPathColumn = true;
-    while (row < obstacleGrid.length) {
-
-        if (obstacleGrid[row][0] !== 1 && clearPathColumn) {
-            obstacleGrid[row][0] = 1;
-        } else {
-            obstacleGrid[row][0] = 0;
-            clearPathColumn = false;
-        }
-        row++;
-    }
-    // change our starting point to [1, 1] bc we have already checked everything in the first row and column;
-    column = 1;
-    row = 1;
-
-    while (row < obstacleGrid.length) {
-        if (obstacleGrid[row]) {
-            while (column < obstacleGrid[row].length) {
-                 // continue looking for paths by adding our left most cell and our top most cell together to get our new unique paths for the cell we are currently at
-                if (obstacleGrid[row][column] !== 1) {
-                    obstacleGrid[row][column] = obstacleGrid[row - 1][column] + obstacleGrid[row][column - 1];
-                } else {
-                    obstacleGrid[row][column] = 0;
-                }
-                column++;
-            }
-        }
-
-        column = 1;
-        row++;
-    }
-
-    // return our finish point which is the last element in the final row
-    return obstacleGrid[obstacleGrid.length - 1][obstacleGrid[0].length - 1];
+    // return the last cell in the grid which is its calculated num of paths to get there;
+    return obstacleGrid[rows - 1][cols - 1];
 };
 
 // Time: O(M×N) M is the length of a row and N is the length of a colummn;
 // Space: O(1) no additional space is allocated;
-// Num Times Practiced = 1;
+// Num Times Practiced = 2;
 
 console.log(uniquePathsWithObstacles(grid)); // 0
 console.log(uniquePathsWithObstacles(grid2)); // 2
