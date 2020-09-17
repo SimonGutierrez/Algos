@@ -39,84 +39,32 @@ A[pointer]
 
 
 const findCosts = (costs) => {
-  let cityACosts = [];
-  let cityBCosts = [];
-  let result = 0;
+    // sort costs by the biggest difference between the two flights, this way you choose the best option first,
+    costs.sort((a, b) => Math.abs(b[0] - b[1] - Math.abs(a[0] - a[1])));
+    // only  half of the flights can go city A or city B
+    let result = 0, counterA = costs.length / 2, counterB = costs.length / 2;
 
-  for (let [cityA, cityB] of costs) {
-    cityACosts.push(cityA);
-    cityBCosts.push(cityB);
-  }
+    for (let [flightA, flightB] of costs) {
+        if (flightA < flightB) {
+            if (counterA > 0) {
+                result += flightA;
+                counterA--;
+            } else {
+                result += flightB;
+                counterB--;
+            }
+        } else if (counterB) {
+                result += flightB;
+                counterB--;
+        } else {
+                result += flightA;
+                counterA--;
+        }
+    }
 
-  cityACosts.sort((a, b) => a - b);
-  cityBCosts.sort((a, b) => a - b);
-  console.log(cityACosts, cityBCosts)
-  console.log(costs)
-  let pointerA = 0;
-  let counterA = costs.length / 2;
-  let pointerB = 0;
-  let counterB = costs.length / 2;
-
-  while (counterA || counterB) {
-    if (cityACosts[pointerA] > cityBCosts[pointerB]) {
-      if (counterB > 0) {
-        result += cityBCosts[pointerB];
-        counterB--;
-        pointerB++;
-      } else {
-        result += cityBCosts[pointerA];
-        counterA--;
-        pointerA++;
-      }
-    } else if (counterA) {
-        result += cityBCosts[pointerA];
-        counterA--;
-        pointerA++;
-    } else {
-        result += cityBCosts[pointerB];
-        counterB--;
-        pointerB++;
-      }
-  }
-
-  return result;
+    return result;
 }
 
 const costs = [[10, 20], [30, 200], [400, 50], [30, 20]];
 
 console.log(findCosts(costs)) // 110
-
-// const costs = [[10, 20], [30, 200], [400, 50], [30, 20]];
-
-// var twoCitySchedCost = function(costs) {
-//     costs = costs.sort((a, b) => Math.abs(b[0] - b[1]) - Math.abs(a[0] - a[1]))
-
-//     let total = 0;
-//     let cityAMax = costs.length / 2;
-//     let cityBMax = costs.length / 2;
-
-//     for (let [cityA, cityB] of costs) {
-//         if (cityA < cityB) {
-//             if (cityAMax) {
-//                 total += cityA;
-//                 cityAMax--;
-//             }
-//             else {
-//                 total += cityB;
-//                 cityBMax--;
-//             }
-//         }
-//         else if (cityBMax) {
-//                 total += cityB;
-//                 cityBMax--;
-//             }
-//             else {
-//                  total += cityA;
-//                 cityAMax--;
-//             }
-//     }
-
-//     return total;
-// };
-
-// console.log(twoCitySchedCost(costs))
