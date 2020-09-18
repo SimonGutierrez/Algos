@@ -18,6 +18,8 @@ const findMagicIndex = (array) => {
     return -1;
 }
 
+// Time: O(log(n)) searching through a sorted array and cutting results in half for each search
+// Space: O(1) no additional space needed
 
 const array1 = [-40, -20, -1, -1, 2, 3, 5, 7, 9, 12, 13];
 const array2 = [-5, 0, 0, 3, 5, 6, 7];
