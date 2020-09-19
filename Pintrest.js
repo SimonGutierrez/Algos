@@ -45,9 +45,7 @@ const isCheating = (words, string) => {
     }
 
     for (let i = 0; i < words.length; i++) {
-        let result = '';
-        let word = words[i];
-        let wordBank = {};
+        let result = '', word = words[i], wordBank = {};
 
         for (let char of word) {
             if (wordBank[char]) {
