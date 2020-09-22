@@ -64,6 +64,7 @@ const coinChange = (coins, amount) => {
 
    for (let i = 1; i <= amount; i++) {
        for (let j = 0; j < coins.length; j++) {
+           //inecies are amounts, only look at an i if the coin you are looking at is <= to it;
            if (coins[j] <= i) {
                dpArray[i] = Math.min(dpArray[i], dpArray[i - coins[j]] + 1);
            }

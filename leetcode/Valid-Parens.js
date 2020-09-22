@@ -16,13 +16,12 @@ const addParens = (array, leftRem, rightRem, subStr, index) => {
 const parens = (n) => {
     let result = [];
     let subArray = new Array(n * 2); // build array to manipulate indecies; max num of n * 2 parens in each set;
-
-    addParens(result, n, n, subArray, 0)
+    addParens(result, n, n, subArray, 0);
 
     return result;
 }
 
-// console.log(parens(3)) // [...]
+console.log(parens(3)) // [...]
 
 
 // https://leetcode.com/problems/valid-parentheses/
@@ -47,6 +46,7 @@ const isValid = (s) => {
 
     return stack.length === 0;
 };
+
 let string1 = '([{[}])', string2 = '([)]', string3 = '()', string4 = '()[]{}';
 
 
