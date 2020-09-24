@@ -33,7 +33,7 @@ const removeDuplicates = (string, k) => {
     for (let i = 0; i < string.length; i++) {
       let char = string[i];
       let peek = stack.length - 1;
-
+        // save obj in the stack with vals character and count;
       if (stack[peek] && stack[peek].character === char) {
         stack[peek].count++
         if (stack[peek].count === k) stack.pop();
