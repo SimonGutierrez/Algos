@@ -1,4 +1,6 @@
 /*
+Lint Code link: https://aaronice.gitbook.io/lintcode/sweep-line/employee-free-time
+
 We are given a list scheduleof employees, which represents the working time for each employee.
 Each employee has a list of non-overlappingIntervals, and these intervals are in sorted order.
 Return the list of finite intervals representing common, positive-length free time forallemployees, also in sorted order.
@@ -17,21 +19,18 @@ We discard any intervals that contain inf as they aren't finite.
 */
 
 const findFreeTime = (employeesTime) => {
-    let allTimes = [];
+    let allTimes = [], result = [];
+
     employeesTime.forEach((employeeTime) => {
         allTimes = [...allTimes, ...employeeTime];
     });
 
     allTimes.sort((a, b) => a[0] - b[0]);
 
-    let result = [];
-
     for (let i = 0; i < allTimes.length - 1; i++) {
-        let curr = allTimes[i];
-        let next = allTimes[i + 1];
-        if (curr[1] < next[0]) {
-            result.push([curr[1], next[0]]);
-        }
+        let curr = allTimes[i], next = allTimes[i + 1];
+
+        if (curr[1] < next[0]) result.push([curr[1], next[0]]);
     }
 
     return result;
