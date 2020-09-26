@@ -18,6 +18,13 @@ free time intervals would be [-inf, 1], [3, 4], [10, inf].
 We discard any intervals that contain inf as they aren't finite.
 */
 
+class Interval {
+    constructor (start, end) {
+        this.start = start;
+        this.end = end;
+    }
+}
+
 const findFreeTime = (employeesTime) => {
     if (employeesTime.length <= 1) return [];
 
@@ -27,25 +34,27 @@ const findFreeTime = (employeesTime) => {
         allTimes = [...allTimes, ...employeeTime];
     });
 
-    allTimes.sort((a, b) => a[0] - b[0]);
+    allTimes.sort((a, b) => a.start - b.start);
 
     for (let i = 0; i < allTimes.length - 1; i++) {
         let curr = allTimes[i], next = allTimes[i + 1];
 
-        if (curr[1] < next[0]) result.push([curr[1], next[0]]);
+        if (curr.end < next.start) result.push(new Interval(curr.end, next.start));
     }
 
     return result;
 }
 
-let schedule1 = [[[1, 2], [5, 6]], [[1, 3]], [[4, 10]]];
-let schedule2 = [[[1, 3], [6, 7]], [[2, 4]], [[2, 5], [9, 12]]];
+let schedule1 = [[new Interval(1, 2), new Interval(5, 6)], [new Interval(1, 3)], [new Interval(4, 10)]];
+let schedule2 = [[new Interval(1, 3), new Interval(6, 7)], [new Interval(2, 4)], [new Interval(2, 5), new Interval(9, 1)]];
+let schedule3 = [];
 
 // Time: O(n*log(n)) sorting algo adds to time complex (quick sort);
 // Space: O(n) ?? possible because assigning a new array when creating newTimes
 
-console.log(findFreeTime(schedule1)) // [ [ 3, 4 ] ]
-console.log(findFreeTime(schedule2)) // [[5,6],[7,9]]
+console.log(findFreeTime(schedule1)) // [ {3, 4} ]
+console.log(findFreeTime(schedule2)) // [{5,6},{7,9}]
+console.log(findFreeTime(schedule3)) // []
 
 
 /*
@@ -80,7 +89,7 @@ const merge = (intervals) => {
 
 let test1 = [[1, 3], [2, 6], [8, 10], [15, 18]];
 let test2 = [[1, 4], [4, 5]];
-let test3 = [[1, 4], [2, 3]]
+let test3 = [[1, 4], [2, 3]];
 
 console.log(merge(test1)) // [ [ 1, 6 ], [ 8, 10 ], [ 15, 18 ] ]
 console.log(merge(test2)) // [ [ 1, 5 ] ]
