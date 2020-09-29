@@ -1,18 +1,16 @@
 
-const names = ['Alison', 'Bob', 'Flex', 'Diana'];
+const names1 = ['Alison', 'Bob', 'Flex', 'Diana'];
 
 
 const createName = (names, max) => {
-  let result = '';
-  let counter = names.length;
+  let count = names.length;
 
-  while (counter) {
-
-    result = concatNames(names, counter);
+  while (count) {
+    let result = concatNames(names, count);
 
     if (result.length <= max) return result;
 
-    counter--;
+    count--;
   }
 
   return '';
@@ -20,37 +18,35 @@ const createName = (names, max) => {
 
 
 const concatNames = (names, limit) => {
+    if (!limit) limit = names.length;
+    let concatedName = '';
 
-  let concatedName = '';
-
-  for (let i = 0; i < names.length && i < limit; i++) {
+    for (let i = 0; i < names.length && i < limit; i++) {
     let name = names[i];
-    if (i == names.length - 2){
-      concatedName += `${name} and `;
+    if (i === names.length - 1) {
+        concatedName += `and ${name}`;
+    } else {
+        concatedName += `${name}, `;
+        }
     }
-    else {
-      concatedName += `${name}, `;
+
+    if (limit < names.length) {
+        concatedName += `and ${names.length - limit} more`;
     }
-  }
 
-  if (limit < names.length) {
-    return concatedName += `and ${names.length - limit} more`;
-  }
-
-
-  return concatedName.trim().slice(0, -1);
+    return concatedName;
 }
 
 // "" limit = 5
 //  "Ali, and 2 more"   limit = 18
 
-// // console.log(concatNames(names)); // "Alison, Bob, Flex,and Diana"
-// console.log(concatNames(names, 2)); // "Alison, Bob, and 2 more"
-// console.log(concatNames(names, 3)); // "Alison, Bob, and 2 more"
-// console.log(concatNames(names, 4)); // "Alison, Bob, and 2 more"
-// console.log(createName(names, 4)); // ""
-// console.log(createName(names, 18)); // "Alison, and 3 more"
-// console.log(createName(names, 100)); // "Alison, Bob, Flex and Diana"
+console.log(concatNames(names1)); // "Alison, Bob, Flex,and Diana"
+console.log(concatNames(names1, 2)); // "Alison, Bob, and 2 more"
+console.log(concatNames(names1, 3)); // "Alison, Bob, Flex, and 1 more"
+console.log(concatNames(names1, 4)); // "Alison, Bob, and 2 more"
+console.log(createName(names1, 4)); // ""
+console.log(createName(names1, 18)); // "Alison, and 3 more"
+console.log(createName(names1, 100)); // "Alison, Bob, Flex and Diana"
 
 const json_data = {
     data: [
@@ -75,7 +71,7 @@ const json_data = {
         state: 'off',
       },
     ]
-  }
+  };
 
 
 /**
@@ -90,28 +86,26 @@ const json_data = {
  */
 
 
-const log = ( arr) => {
+// const log = ( arr) => {
 
-  let roomLog = new Map();
+//   let roomLog = new Map();
 
-  for (let location of arr.data) {
+//   for (let location of arr.data) {
 
-    if (roomLog.has(location.room) && location.state != roomLog.get(location.room).currentState) {
-        let currentLocation = roomLog.get(location.room);
-        currentLocation[location.state].push(location.time);
-        currentLocation.currentState =  currentLocation.currentState  == 'on' ? 'off' : 'on';
-        roomLog.set(location.room, currentLocation);
-    }
-    else {
-      roomLog.set(location.room, { on: [], off: [], currentState: location.state})
-    }
-  }
+//     if (roomLog.has(location.room) && location.state != roomLog.get(location.room).currentState) {
+//         let currentLocation = roomLog.get(location.room);
+//         currentLocation[location.state].push(location.time);
+//         currentLocation.currentState =  currentLocation.currentState  == 'on' ? 'off' : 'on';
+//         roomLog.set(location.room, currentLocation);
+//     }
+//     else {
+//       roomLog.set(location.room, { on: [], off: [], currentState: location.state})
+//     }
+//   }
 
 
-  return roomLog;
+//   return roomLog;
 
-}
+// }
 
-console.log(log(json_data));
-
-[]
+// console.log(log(json_data));
