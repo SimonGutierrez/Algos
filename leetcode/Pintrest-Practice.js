@@ -40,13 +40,13 @@ const concatNames = (names, limit) => {
 // "" limit = 5
 //  "Ali, and 2 more"   limit = 18
 
-console.log(concatNames(names1)); // "Alison, Bob, Flex,and Diana"
-console.log(concatNames(names1, 2)); // "Alison, Bob, and 2 more"
-console.log(concatNames(names1, 3)); // "Alison, Bob, Flex, and 1 more"
-console.log(concatNames(names1, 4)); // "Alison, Bob, and 2 more"
-console.log(createName(names1, 4)); // ""
-console.log(createName(names1, 18)); // "Alison, and 3 more"
-console.log(createName(names1, 100)); // "Alison, Bob, Flex and Diana"
+// console.log(concatNames(names1)); // "Alison, Bob, Flex,and Diana"
+// console.log(concatNames(names1, 2)); // "Alison, Bob, and 2 more"
+// console.log(concatNames(names1, 3)); // "Alison, Bob, Flex, and 1 more"
+// console.log(concatNames(names1, 4)); // "Alison, Bob, and 2 more"
+// console.log(createName(names1, 4)); // ""
+// console.log(createName(names1, 18)); // "Alison, and 3 more"
+// console.log(createName(names1, 100)); // "Alison, Bob, Flex and Diana"
 
 const json_data = {
     data: [
@@ -111,42 +111,102 @@ const json_data = {
 // console.log(log(json_data));
 
 /*
-find how many days until a holiday return:
+Part 1:
 
+Find how many days until a holiday return:
 `Holiday is x days away`
 
 if the holiday has passed return:
-
 null;
 
 if holiday is today return:
-
 `Holiday is today`
+
+Part 2:
+
+given an array of holidays find the holiday that is closest to days date;
+Then order the rest of the holidays after that one base one which ones are closest;
+
+Today = 10 1, 2020;
+
+input: [
+  {name: 'Thanksgiving', date: new Date(2020, 10, 24)}
+  {name: 'Halloween', date: new Date(2020, 9, 30)},
+  {name: 'New Years', date: new Date(2021, 0, 1)},
+  {name: 'Valentines Day', date: new Date(2021, 1, 14)},
+  {name: 'Christmas', date: new Date(2020, 11, 25)},
+]
+
+output: [
+  {name: 'Halloween', date: new Date(2020, 9, 30)},
+  {name: 'Thanksgiving', date: new Date(2020, 10, 24)}
+  {name: 'Christmas', date: new Date(2020, 11, 25)},
+  {name: 'New Years', date: new Date(2021, 0, 1)},
+  {name: 'Valentines Day', date: new Date(2021, 1, 14)},
+]
+
 */
 
 
-let test1 = {name: 'Halloween', date: new Date('2020, 30, 10')}
+let test1 = {name: 'Halloween', date: new Date(2020, 9, 30)};
+let test2 = [
+  {name: 'Halloween', date: new Date(2020, 9, 30)},
+  {name: 'Thanksgiving', date: new Date(2020, 10, 24)},
+  {name: 'Christmas', date: new Date(2020, 11, 25)},
+  {name: 'New Years', date: new Date(2021, 0, 1)},
+  {name: 'Valentines Day', date: new Date(2021, 1, 14)}
+];
 
 const howManyDays = (dic) => {
   let today = new Date();
+  let holidayTime = dic.date.getTime();
+  let todaysTime = today.getTime();
 
-  if (dic.date.now() === today.date.now()) {
-    return `${dic.name} is today`
-  } else if (dic.date.now() > today.now()) {
-    let diff = // look up the diff in days on google
-    return `Holiday is diff days away`
+  if (holidayTime === todaysTime) {
+    return `${dic.name} is today`;
+  } else if (holidayTime > todaysTime) {
+    let days = Math.floor((Math.abs(todaysTime - holidayTime) / 1000) / 86400)
+    return `${dic.name} is ${days} day(s) away`;
   } else {
     return null;
   }
 }
 
+const holidayOrder = (holidays) => {
+  holidays.sort((a, b) => a.date.getMonth() - b.date.getMonth());
 
+  let today = new Date().getMonth(), left = 0, right = holidays.length - 1, start;
+
+  while (left < right) {
+    let mid = Math.floor((left + right) / 2);
+
+
+    if (holidays[mid].date.getMonth() < today) {
+      left = mid + 1;
+    } else if (holidays[mid].date.getMonth() > today) {
+      right = mid;
+    } else {
+      start = mid;
+      left = mid + 1;
+    }
+  }
+
+  if (!start) start = left;
+
+  let firstHalf = holidays.slice(start);
+  let secondHalf = holidays.slice(0, start);
+
+  return firstHalf.concat(secondHalf);
+}
+
+// console.log(howManyDays(test1)) // 'Halloween is x days away;
+console.log(holidayOrder(test2))
 
 /*
 make a grid and base it off of the diff weights of the pins that come in; Pins are already ordered in most relv to least;
 you want the grid to be as balanced as possible meaning the height of each col should be balanced no one cols height should be that much diff than another
 
-input: 
+input:
 [
   {height: 200},
   {height: 150},
