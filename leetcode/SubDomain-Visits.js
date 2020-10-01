@@ -62,7 +62,7 @@ let test2 = ['900 google.mail.com', '50 yahoo.com', '1 intel.mail.com', '5 wiki.
 const subdomainVisits = (array) => {
     let domainMap = makeMap(array);
 
-    return [...domainMap.keys()].map(subDomain => `${domainMap.get(subDomain)} ${subDomain}`)
+    return [...domainMap.entries()].map(subDomain => `${subDomain[1]} ${subDomain[0]}`);
   }
 
   const makeMap = (array) => {
