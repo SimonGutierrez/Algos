@@ -111,6 +111,8 @@ const json_data = {
 // console.log(log(json_data));
 
 /*
+HOLIDAY TRACKER
+
 Part 1:
 
 Find how many days until a holiday return:
@@ -200,7 +202,7 @@ const holidayOrder = (holidays) => {
 }
 
 // console.log(howManyDays(test1)) // 'Halloween is x days away;
-console.log(holidayOrder(test2))
+// console.log(holidayOrder(test2)) // return holidays in order from todays date;
 
 /*
 make a grid and base it off of the diff weights of the pins that come in; Pins are already ordered in most relv to least;
@@ -220,3 +222,46 @@ outPut:
   [{height: 150},{height: 50}]
 ]
 */
+
+let pins1 =
+[
+  {id: 1, height: 200},
+  {id: 2, height: 150},
+  {id: 3, height: 50},
+  {id: 4, height: 500},
+  {id: 5, height: 200},
+  {id: 6, height: 100},
+  {id: 7, height: 50},
+  {id: 8, height: 150},
+  {id: 9, height: 100},
+]
+
+const balancedGrid = (pins, cols) => {
+  let colHeights = [];
+  let grid = [];
+
+  while (cols) {
+    grid.push([]);
+    cols--;
+  }
+
+  for (let j = 0; j < pins.length; j++) {
+    let currCol = grid[j];
+    let currPin = pins[j];
+
+    if (currCol) {
+      currCol.push(currPin);
+      colHeights.push(currPin.height)
+    } else {
+      let min = Math.min(...colHeights);
+      let index = colHeights.indexOf(min);
+      grid[index].push(currPin);
+      colHeights[index] += currPin.height;
+    }
+  }
+
+  return grid;
+}
+
+
+console.log(balancedGrid(pins1, 2))
