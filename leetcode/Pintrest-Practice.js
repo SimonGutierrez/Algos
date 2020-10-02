@@ -223,7 +223,15 @@ outPut:
 ]
 */
 
-let pins1 =
+const pins1 =
+[
+  {id: 1, height: 200},
+  {id: 2, height: 150},
+  {id: 3, height: 50},
+  {id: 4, height: 100}
+];
+
+const pins2 =
 [
   {id: 1, height: 200},
   {id: 2, height: 150},
@@ -234,9 +242,11 @@ let pins1 =
   {id: 7, height: 50},
   {id: 8, height: 150},
   {id: 9, height: 100},
-]
+];
 
 const balancedGrid = (pins, cols) => {
+  if (!cols) cols = Math.floor(Math.sqrt(pins.length));
+
   let colHeights = [];
   let grid = [];
 
@@ -260,8 +270,9 @@ const balancedGrid = (pins, cols) => {
     }
   }
 
-  return grid;
+  return cols;
 }
 
 
-console.log(balancedGrid(pins1, 2))
+console.log(balancedGrid(pins1, 2));
+console.log(balancedGrid(pins2));
