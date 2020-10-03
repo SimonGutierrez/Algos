@@ -244,8 +244,16 @@ const pins2 =
   {id: 9, height: 100},
 ];
 
+/*
+Edge Cases:
+  -Empty array of pins
+  -Number of cols > number of pins
+*/
+
 const balancedGrid = (pins, cols) => {
+  if (!pins) return [];
   if (!cols) cols = Math.floor(Math.sqrt(pins.length));
+  if (cols > pins.length) cols = pins.length;
 
   let colHeights = [];
   let grid = [];
@@ -273,6 +281,8 @@ const balancedGrid = (pins, cols) => {
   return cols;
 }
 
+// Time: O(n + m) number of pins and cols;
+// Space: O(m) height of cols saved;
 
 console.log(balancedGrid(pins1, 2));
 console.log(balancedGrid(pins2));
