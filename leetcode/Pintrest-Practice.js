@@ -174,6 +174,8 @@ const howManyDays = (dic) => {
   }
 }
 
+// change return datat structure to {comingSoon: days away, upNext: [holidays]}
+
 const holidayOrder = (holidays) => {
   holidays.sort((a, b) => a.date.getMonth() - b.date.getMonth());
 
@@ -181,7 +183,6 @@ const holidayOrder = (holidays) => {
 
   while (left < right) {
     let mid = Math.floor((left + right) / 2);
-
 
     if (holidays[mid].date.getMonth() < today) {
       left = mid + 1;
@@ -247,6 +248,7 @@ const pins2 =
 /*
 Edge Cases:
   -Empty array of pins
+  -Empty num of Cols
   -Number of cols > number of pins
 */
 
@@ -269,7 +271,7 @@ const balancedGrid = (pins, cols) => {
 
     if (currCol) {
       currCol.push(currPin);
-      colHeights.push(currPin.height)
+      colHeights.push(currPin.height);
     } else {
       let min = Math.min(...colHeights);
       let index = colHeights.indexOf(min);
@@ -278,7 +280,7 @@ const balancedGrid = (pins, cols) => {
     }
   }
 
-  return cols;
+  return colHeights;
 }
 
 // Time: O(n + m) number of pins and cols;

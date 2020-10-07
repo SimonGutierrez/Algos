@@ -9,7 +9,10 @@ class ListNode {
 }
 
 const deleteDuplicates = (head) => {
-    let seen = new Set(), currHead = head, noDupes = new ListNode(-1), temp = noDupes;
+    let seen = new Set(),
+    currHead = head,
+    noDupes = new ListNode(-1),
+    temp = noDupes;
 
     while (currHead) {
         if (!seen.has(currHead.val)) {
