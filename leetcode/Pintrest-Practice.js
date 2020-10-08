@@ -158,6 +158,13 @@ let test2 = [
   {name: 'New Years', date: new Date(2021, 0, 1)},
   {name: 'Valentines Day', date: new Date(2021, 1, 14)}
 ];
+let test3 = [
+  {name: 'Halloween', date: new Date(2020, 9, 30)},
+  {name: 'Thanksgiving', date: new Date(2020, 10, 24)},
+  {name: 'Christmas', date: new Date(2020, 11, 25)},
+  {name: 'New Years', date: new Date(2020, 0, 1)},
+  {name: 'Valentines Day', date: new Date(2020, 1, 14)}
+];
 
 const howManyDays = (dic) => {
   let today = new Date();
@@ -173,8 +180,6 @@ const howManyDays = (dic) => {
     return null;
   }
 }
-
-// change return datat structure to {comingSoon: days away, upNext: [holidays]}
 
 const holidayOrder = (holidays) => {
   holidays.sort((a, b) => a.date.getMonth() - b.date.getMonth());
@@ -202,8 +207,31 @@ const holidayOrder = (holidays) => {
   return firstHalf.concat(secondHalf);
 }
 
-// console.log(howManyDays(test1)) // 'Halloween is x days away;
-// console.log(holidayOrder(test2)) // return holidays in order from todays date;
+const holidayOrderII = (holidayList) => {
+  holidayList.sort((a, b) => a.date.getMonth() - b.date.getMonth());
+  let result = {comingSoon: '', upNext: []};
+  let todaysDate = new Date();
+  let closestHoliday = null;
+
+  for (let i = 0; i < holidayList.length; i++) {
+    let holiday = holidayList[i];
+    if (holiday.date.getTime() >= todaysDate.getTime()) {
+      if (!closestHoliday) {
+        closestHoliday = holiday;
+      } else {
+        result.upNext.push(holiday);
+      }
+    }
+  }
+
+  result.comingSoon = howManyDays(closestHoliday);
+
+  return result;
+}
+
+console.log(howManyDays(test1)) // 'Halloween is x days away;
+console.log(holidayOrder(test2)) // return holidays in order from todays date;
+console.log(holidayOrderII(test3)) // return holidays in structured order {comingSoon: days away, upNext: [holidays]}
 
 /*
 make a grid and base it off of the diff weights of the pins that come in; Pins are already ordered in most relv to least;
