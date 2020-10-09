@@ -2,11 +2,25 @@
 // remove all dups in string
 
 const removeDuplicatesI = (S)  => {
+  let stack  = [];
 
+  for (let char of S) {
+    let peek = stack[stack.length - 1];
+    if (peek === char) {
+      stack.pop()
+    } else {
+      stack.push(char);
+    }
+  }
+
+  return stack.join('');
 };
+
+console.log(removeDuplicatesI('aaaaaaaaaaaaab')); // ab
 
 
 /*
+LeetCode Link: https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/
 Given a string s, a k duplicate removal consists of choosing k adjacent and equal letters from s and removing them causing the left and the right side of the deleted substring to concatenate together.
 
 We repeatedly make k duplicate removals on s until we no longer can.
@@ -32,14 +46,14 @@ Finally delete "ddd", get "aa"
 
 */
 
-const removeDuplicates = (string, k) => {
+const removeDuplicatesII = (string, k) => {
     let stack = [];
     let result = '';
 
     for (let i = 0; i < string.length; i++) {
       let char = string[i];
       let peek = stack.length - 1;
-        // save obj in the stack with vals character and count;
+        // save obj in the stack with vals character and count {a: 1};
       if (stack[peek] && stack[peek].character === char) {
         stack[peek].count++
         if (stack[peek].count === k) stack.pop();
@@ -49,11 +63,36 @@ const removeDuplicates = (string, k) => {
       }
     }
 
-    for (let {character, count} of stack) {
+    for (let { character, count } of stack) {
       result += character.repeat(count);
     }
 
     return result;
   }
 
-  console.log(removeDuplicates('deeedbbcccbdaa', 3)) // 'aa'
+  console.log(removeDuplicatesII('deeedbbcccbdaa', 3)) // 'aa'
+
+
+const removeDuplicatesIII = (string, k) => {
+  let result = '';
+  let stack = [];
+
+  for (let char of string) {
+    let peek = stack[stack.length - 1];
+    if (peek && peek.char === char) {
+      let newVal = stack.pop();
+      newVal.times++;
+      if (newVal.times < k) stack.push(newVal);
+    } else {
+      stack.push({ char, times: 1 });
+    }
+  }
+
+  for (let { char, times } of stack) {
+    result += char.repeat(times);
+  }
+
+  return result;
+}
+
+console.log(removeDuplicatesIII('deeedbbcccbdaa', 3)) // aa;

@@ -209,12 +209,11 @@ const holidayOrder = (holidays) => {
 
 const holidayOrderII = (holidayList) => {
   holidayList.sort((a, b) => a.date.getMonth() - b.date.getMonth());
-  let result = {comingSoon: '', upNext: []};
+  let result = { comingSoon: '', upNext: [] };
   let todaysDate = new Date();
   let closestHoliday = null;
 
-  for (let i = 0; i < holidayList.length; i++) {
-    let holiday = holidayList[i];
+  for (let holiday of holidayList) {
     if (holiday.date.getTime() >= todaysDate.getTime()) {
       if (!closestHoliday) {
         closestHoliday = holiday;
@@ -308,7 +307,7 @@ const balancedGrid = (pins, cols) => {
     }
   }
 
-  return colHeights;
+  return grid;
 }
 
 // Time: O(n + m) number of pins and cols;
