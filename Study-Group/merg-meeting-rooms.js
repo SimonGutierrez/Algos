@@ -41,3 +41,58 @@ console.log(mergeRanges([
     { startTime: 2, endTime: 5 },
   ])); // [{ startTime: 1, endTime: 8 }]
 
+// LeetCode Link: https://leetcode.com/problems/merge-intervals/
+
+const merge = (intervals) => {
+    intervals.sort((a, b) => a[0] - b[0]);
+
+    let result = [intervals[0]];
+
+    for (let i = 1; i < intervals.length; i++) {
+        let peek = result[result.length - 1];
+        let curr = intervals[i];
+        if (peek[1] >= curr[0]) {
+            let newInterval = [peek[0], Math.max(peek[1], curr[1])];
+            result.pop();
+            result.push(newInterval);
+        } else  {
+            result.push(curr);
+        }
+    }
+
+    return result;
+}
+
+let test1 = [[1, 3], [2, 6], [8, 10], [15, 18]];
+
+console.log(merge(test1)) // [[1,6],[8,10],[15,18]]
+
+
+// leetcode Link: https://leetcode.com/problems/insert-interval/
+// insert an interval then merge intervals;
+
+const insert = (intervals, newInterval) => {
+
+    let combine = intervals.length ? [] : [newInterval];
+    let pushed = false;
+
+    for (let elem of intervals) {
+        if (elem[0] > newInterval[0] && !pushed) {
+            combine.push(newInterval);
+            combine.push(elem);
+            pushed = true;
+        } else {
+            combine.push(elem)
+        }
+    }
+
+    if (!pushed) combine.push(newInterval);
+
+    const merged = merge(combine);
+
+    return merged;
+}
+
+const test2 = [[[1, 5]], [2, 7]]
+
+console.log(insert(test2[0], test2[1])) // [1, 7]
