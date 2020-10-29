@@ -58,3 +58,19 @@ var uniquePathsWithObstacles = function(obstacleGrid) {
 console.log(uniquePathsWithObstacles(grid)); // 0
 console.log(uniquePathsWithObstacles(grid2)); // 2
 console.log(uniquePathsWithObstacles(grid3)); // 1
+
+// Link: https://algorithms.tutorialhorizon.com/count-all-paths-from-top-left-to-bottom-right-in-two-dimensional-array-including-diagonal-paths/
+
+const krakenPaths = (n, m) => {
+    const myGrid = new Array(m).fill().map(() => new Array(n).fill(1));
+
+    for (let row = 1; row < myGrid.length; row++) {
+        for (let col = 1; col < myGrid[row].length; col++) {
+            myGrid[row][col] = myGrid[row - 1][col] + myGrid[row][col - 1] + myGrid[row - 1 ][col - 1];
+        }
+  }
+
+  return myGrid[m - 1][n - 1];
+}
+
+console.log(krakenPaths(3, 3)) // 15
