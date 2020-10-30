@@ -33,7 +33,15 @@ logSystem.retrieve("2016:01:01:01:01:01", "2017:01:01:23:00:00", "Hour");
 
 
 var LogSystem = function() {
-
+    this.map = new Map();
+    this.index = {
+        Year: 1,
+        Month: 2,
+        Day: 3,
+        Hour: 4,
+        Minute: 5,
+        Second: 6
+    }
 };
 
 /*
@@ -42,7 +50,8 @@ var LogSystem = function() {
  * @return {void}
  */
 LogSystem.prototype.put = function(id, timestamp) {
-
+    let newTimestamp = timestamp.split(':');
+    this.map.set(newTimestamp, id);
 };
 
 /*
@@ -52,7 +61,23 @@ LogSystem.prototype.put = function(id, timestamp) {
  * @return {number[]}
  */
 LogSystem.prototype.retrieve = function(start, end, granularity) {
+    let gra = this.index[granularity];
+    start = new Date(...start.split(':').slice(0, gra)).getTime();
+    end = new Date(...end.split(':').slice(0, gra)).getTime();
 
+    let result = [];
+
+    for (let [time, id] of this.map.entries()) {
+        // convert to seconds and compare
+        let newTime = new Date(...time).getTime();
+        console.log('id, start, time, end', id, start, newTime, end)
+
+        if (start <= newTime && newTime >= end) {
+            result.push(id);
+        }
+    }
+
+    return result;
 };
 
 /*
@@ -61,3 +86,11 @@ LogSystem.prototype.retrieve = function(start, end, granularity) {
  * obj.put(id,timestamp)
  * var param_2 = obj.retrieve(start,end,granularity)
  */
+
+ let newLog = new LogSystem();
+ newLog.put(1, '2017:01:01:23:59:59');
+ newLog.put(2, '2017:01:01:22:59:59');
+ newLog.put(3, '2016:01:01:00:00:00');
+
+ console.log(newLog.retrieve('2016:01:01:01:01:01', '2017:01:01:23:00:00', 'Year'));
+ console.log(newLog.retrieve('2016:01:01:01:01:01', '2017:01:01:23:00:00', 'Hour'));
