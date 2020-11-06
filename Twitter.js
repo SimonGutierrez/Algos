@@ -24,8 +24,6 @@ output: 5
 Explaination: 3 + 1 + 1 = 5
 */
 
-const { count } = require('console');
-
 const findMaxContainters = (budget, cost, tradeInVal) => {
     let maxContainers = Math.floor(budget / cost);
     let remaining = maxContainers;
@@ -33,7 +31,7 @@ const findMaxContainters = (budget, cost, tradeInVal) => {
     while (remaining >= tradeInVal) {
         let calc = Math.floor(remaining / tradeInVal);
         maxContainers += calc;
-        remaining = calc + remaining % tradeInVal;
+        remaining = calc + (remaining % tradeInVal);
     }
 
     return maxContainers;
