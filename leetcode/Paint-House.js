@@ -39,6 +39,7 @@ let costs1 = [[17, 2, 17], [16, 16, 5], [14, 3, 19]];
 let costs2 = [[7, 6, 2]];
 let costs3 = [[3, 5, 3], [6, 17, 6], [7, 13, 18], [9, 10, 18]];
 
-console.log(minCost(costs1)) // 10
-console.log(minCost(costs2)) // 2
-console.log(minCost(costs3)) // 26
+// console.log(minCost(costs1)) // 10
+// console.log(minCost(costs2)) // 2
+// console.log(minCost(costs3)) // 26
+
