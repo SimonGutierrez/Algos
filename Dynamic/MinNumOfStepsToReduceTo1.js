@@ -1,8 +1,8 @@
 /*
 Find the minimum number of steps to reduce n to 1
 Steps allowed:
-1. reduce n by 3 if n % 3 = 0;
-2. reduce by 2 if n % 2 = 0;
+1. divide n by 3 if n % 3 = 0;
+2. divide by 2 if n % 2 = 0;
 3. else subtract 1 (n  - 1);
 */
 
