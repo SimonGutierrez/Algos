@@ -2,7 +2,6 @@
 /* eslint-disable max-statements */
 
 /*
-
 merge two strings together using the folling conditions:
 1) add the letter with the least amount of occuranses first
 example: 'dce' 'cccdb' here d will be added bc its occurance is 1 in its string and c is 3 in its sting;
@@ -11,7 +10,6 @@ example: 'dce' 'cccdb' here d will be added bc its occurance is 1 in its string 
 exaple: 'super' 'tower' here s will go first bc it comes before t in the aplhabet, and so on..
 
 3) if the occurances and letters are the same S1 will always go first by default;
-
 */
 function mergeStrings(s1, s2) {
     let dictS1 = {};
@@ -54,16 +52,15 @@ function mergeStrings(s1, s2) {
             result += currLetterS2;
             pointerS2++;
         } else if (s1.charCodeAt(pointerS1) < s2.charCodeAt(pointerS2)) {
-                result += currLetterS1;
-                pointerS1++;
-            } else if (s1.charCodeAt(pointerS1) > s2.charCodeAt(pointerS2)) {
-                result += currLetterS2;
-                pointerS2++;
-            } else {
-                result += currLetterS1;
-                pointerS1++;
-            }
-
+            result += currLetterS1;
+            pointerS1++;
+        } else if (s1.charCodeAt(pointerS1) > s2.charCodeAt(pointerS2)) {
+            result += currLetterS2;
+            pointerS2++;
+        } else {
+            result += currLetterS1;
+            pointerS1++;
+        }
     }
 
     return result;
