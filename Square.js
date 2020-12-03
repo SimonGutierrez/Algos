@@ -67,12 +67,12 @@ function mergeStrings(s1, s2) {
 }
 
 const test1 = 'dce';
-const test2 = 'cccbd';
-console.log(mergeStrings(test1, test2)) // 'dcecccbd'
+// const test2 = 'cccbd';
+// console.log(mergeStrings(test1, test2)) // 'dcecccbd'
 
-let test3 = 'super';
-let test4 = 'tower';
-console.log(mergeStrings(test3, test4)) // 'stouperwer'
+// let test3 = 'super';
+// let test4 = 'tower';
+// console.log(mergeStrings(test3, test4)) // 'stouperwer'
 
 
 /*
@@ -121,6 +121,82 @@ const concatenationsSum = (a) => {
     return Number(result.reduce((strNum1, strNum2) => Number(strNum1) + Number(strNum2)));
 }
 
-console.log(concatenationsSum([10, 2])) // 1344
-console.log(concatenationsSum([8])) // 88
-console.log(concatenationsSum([1, 2, 3])) // 198
+// console.log(concatenationsSum([10, 2])) // 1344
+// console.log(concatenationsSum([8])) // 88
+// console.log(concatenationsSum([1, 2, 3])) // 198
+
+
+/*
+apply gravity to a grid after a 90 deg roation;
+restrictions:  - movable pieces are '*'
+               - non-movable pieces are '#'
+               - empty spaces are ''
+               - a movable piece can only drop if empty spaces are avail
+               - if a non-movable piece is in the way a movable one can not drop past it
+
+input: [
+    ['*', '', ''],
+    ['*', '#', ''],
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', ''],
+]
+
+outPut: [
+    ['', '', '', '*', ''],
+    ['', '', '', '#', ''],
+    ['', '', '', '', '*'],
+]
+*/
+
+const rotateAndApplyGrav = (grid) => {
+    let rotatedGrid = new Array(grid[0].length).fill(null).map(() => new Array(grid.length));
+    let rotatedCol = rotatedGrid[0].length - 1;
+    // fill in our rotated grid in the right order;
+    for (let i = 0; i < grid.length; i++) {
+        let row = grid[i];
+        for (let j = 0; j < row.length; j++) {
+            rotatedGrid[j][rotatedCol] = grid[i][j];
+        }
+        rotatedCol--;
+    }
+
+    // apply gravity to our newly rotated grid;
+    for (let i = 0; i < rotatedGrid[0].length; i++) {
+        let start = rotatedGrid.length - 1;
+        let end = rotatedGrid.length - 2;
+
+        while (end >= 0) {
+            if (rotatedGrid[start][i] === '' && rotatedGrid[end][i] === '*') {
+                let temp = rotatedGrid[start][i];
+                rotatedGrid[start][i] = rotatedGrid[end][i];
+                rotatedGrid[end][i] = temp;
+                start--;
+            } else if (rotatedGrid[start][i] !== '') {
+                start--;
+            } else if (rotatedGrid[end][i] === '#') {
+                start = end - 1;
+                end -= 2;
+            } else {
+                end--;
+            }
+        }
+    }
+    return rotatedGrid;
+}
+
+let input = [
+    ['*', '', ''],
+    ['*', '#', ''],
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', ''],
+]
+
+console.log(rotateAndApplyGrav(input));
+
+let twice = rotateAndApplyGrav(input);
+console.log(rotateAndApplyGrav(twice));
+
+let thrice = rotateAndApplyGrav(twice);
+console.log(rotateAndApplyGrav(thrice));
