@@ -229,7 +229,6 @@ The result of the last get query for 3 is 5 in the resulting hashmap.
 
 
 */
-// time out error for change in keys, hashmap should be an array;
 
 function hashMap(queryType, query) {
     let myMap = [];
