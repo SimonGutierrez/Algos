@@ -68,3 +68,28 @@ const findCosts = (costs) => {
 const costs = [[10, 20], [30, 200], [400, 50], [30, 20]];
 
 console.log(findCosts(costs)) // 110
+
+
+// second solution
+
+const twoCitySchedCost = (cityCosts) => {
+    cityCosts.sort((a, b) => Math.abs(b[0] - b[1]) - Math.abs(a[0] - a[1]));
+    let maxA = cityCosts.length / 2;
+    let maxB = cityCosts.length / 2;
+    let total = 0;
+
+    for (let cost of cityCosts) {
+       let [costA, costB] = cost;
+        if (maxB > 0 && costA >= costB || maxA === 0) {
+            total += costB;
+            maxB--;
+        } else if (maxA > 0 && costA <= costB || maxB === 0) {
+            total += costA;
+            maxA--;
+        }
+    }
+
+    return total;
+};
+
+console.log(twoCitySchedCost(costs)) // 110
