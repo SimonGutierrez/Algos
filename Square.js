@@ -151,9 +151,11 @@ outPut: [
 */
 
 const rotateAndApplyGrav = (grid) => {
-    let rotatedGrid = new Array(grid[0].length).fill(null).map(() => new Array(grid.length));
+    // create our empty matrix with the right dimensions (aka original rotated 90 deg)
+    let rotatedGrid = new Array(grid[0].length).fill().map(() => new Array(grid.length));
+    // starting point in our new rotated grid
     let rotatedCol = rotatedGrid[0].length - 1;
-    // fill in our rotated grid in the right order;
+    // fill in our rotated grid in the right order, fill in the rotated grid with vals from original grid col by col but starting from the end and working your way back, from the top of the last col moving down by rows, then once filled move to the next col to the left, repeat this process until the entire grid is filled. The original grid will be itterated through in normal order row by row.
     for (let i = 0; i < grid.length; i++) {
         let row = grid[i];
         for (let j = 0; j < row.length; j++) {
@@ -168,17 +170,21 @@ const rotateAndApplyGrav = (grid) => {
         let end = rotatedGrid.length - 2;
         // Scans from the bottom of the grid up, swapping '' with the first '*' element that occurs above it
         while (end >= 0) {
+            // if start is empty space and end is a movable piece then swap them
             if (rotatedGrid[start][i] === '' && rotatedGrid[end][i] === '*') {
                 let temp = rotatedGrid[start][i];
                 rotatedGrid[start][i] = rotatedGrid[end][i];
                 rotatedGrid[end][i] = temp;
                 start--;
             } else if (rotatedGrid[start][i] !== '') {
+                // keep moving start until you find the next avail empty space
                 start--;
             } else if (rotatedGrid[end][i] === '#') {
+                // if end ever falls on an in-movable piece Reset our start and end to be above that piece
                 start = end - 1;
                 end -= 2;
             } else {
+                // keep moving end until you find a movable piece to swap
                 end--;
             }
         }
@@ -187,20 +193,20 @@ const rotateAndApplyGrav = (grid) => {
 }
 
 let input = [
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', ''],
     ['*', '', ''],
     ['*', '#', ''],
-    ['', '', ''],
-    ['', '', ''],
-    ['', '', ''],
 ]
 
-// console.log(rotateAndApplyGrav(input));
+console.log(rotateAndApplyGrav(input));
 
-// let twice = rotateAndApplyGrav(input);
-// console.log(rotateAndApplyGrav(twice));
+let twice = rotateAndApplyGrav(input);
+console.log(rotateAndApplyGrav(twice));
 
-// let thrice = rotateAndApplyGrav(twice);
-// console.log(rotateAndApplyGrav(thrice));
+let thrice = rotateAndApplyGrav(twice);
+console.log(rotateAndApplyGrav(thrice));
 
 
 /*
@@ -236,7 +242,7 @@ function hashMap(queryType, query) {
     for (let i = 0; i < queryType.length; i++) {
         let currQtype = queryType[i];
         let currQ = query[i];
-        console.log(myMap);
+
         if (currQtype === 'insert') {
             myMap[currQ[0]] = currQ[1];
         } else if (currQtype === 'addToValue') {
@@ -258,4 +264,4 @@ function hashMap(queryType, query) {
 let testQ1 = ['insert', 'insert', 'addToValue', 'addToKey', 'get'];
 let testQ2 = [[1, 2], [2, 3], [2], [1], [3]];
 
-console.log(hashMap(testQ1, testQ2))
+// console.log(hashMap(testQ1, testQ2))
