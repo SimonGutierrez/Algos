@@ -1,6 +1,8 @@
 /* eslint-disable complexity */
 /* eslint-disable max-statements */
 
+const { off } = require('process');
+
 /*
 merge two strings together using the folling conditions:
 1) add the letter with the least amount of occuranses first
@@ -107,7 +109,7 @@ a[2] ∘ a[2] = 3 ∘ 3 = 33.
 The total result is 11 + 12 + 13 + 21 + 22 + 23 + 31 + 32 + 33 = 198.
 */
 
-
+// brute force approach
 const concatenationsSum = (a) => {
     let result = [];
 
@@ -122,9 +124,52 @@ const concatenationsSum = (a) => {
     return Number(result.reduce((strNum1, strNum2) => Number(strNum1) + Number(strNum2)));
 }
 
-// console.log(concatenationsSum([10, 2])) // 1344
-// console.log(concatenationsSum([8])) // 88
-// console.log(concatenationsSum([1, 2, 3])) // 198
+// optimal solution
+const concatenationsSum2 = (a) => {
+    let lowSum = 0;
+
+    for (let num of a) lowSum += num;
+
+    let sum = lowSum * a.length;
+
+    for (let i = 0; i < a.length; i++) {
+        let size = a[i].toString().length;
+        let offset = ithPower(10, size);
+        sum = sum + lowSum * offset;
+    }
+
+    return sum;
+}
+
+function ithPower(base, power) {
+    let result = 1;
+
+    for (let i = 1; i <= power; i++) result *= base;
+
+    return result;
+}
+
+const concatenationsSum3 = (a) => {
+    let lowSum = 0;
+    let offsetSum = 0;
+    for (let i = 0; i < a.length; i++) {
+        lowSum += a[i];
+
+        let size = a[i].toString().length;
+        let offset = ithPower(10, size);
+        offsetSum += offset;
+    }
+
+    return lowSum * a.length + lowSum * offsetSum;
+}
+
+
+console.log(concatenationsSum([10, 2])) // 1344
+console.log(concatenationsSum([8])) // 88
+console.log(concatenationsSum([1, 2, 3])) // 198
+console.log(concatenationsSum2([10, 2])) // 1344
+console.log(concatenationsSum2([8])) // 88
+console.log(concatenationsSum2([1, 2, 3])) // 198
 
 
 /*
