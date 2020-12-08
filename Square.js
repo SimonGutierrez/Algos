@@ -309,4 +309,22 @@ function hashMap(queryType, query) {
 let testQ1 = ['insert', 'insert', 'addToValue', 'addToKey', 'get'];
 let testQ2 = [[1, 2], [2, 3], [2], [1], [3]];
 
-// console.log(hashMap(testQ1, testQ2))
+console.log(hashMap(testQ1, testQ2))
+
+/*
+Example
+
+For a = [25, 35, 872, 228, 53, 278, 872], the output should be digitAnagrams(a) = 4.
+
+There are 4 pairs of digit anagrams:
+
+a[1] = 35 and a[4] = 53 (i = 1 and j = 4),
+a[2] = 872 and a[5] = 278 (i = 2 and j = 5),
+a[2] = 872 and a[6] = 872 (i = 2 and j = 6),
+a[5] = 278 and a[6] = 872 (i = 5 and j = 6).
+
+*/
+
+const digitAnagrams = (a) => {
+
+}
