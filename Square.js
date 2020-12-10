@@ -325,6 +325,17 @@ a[5] = 278 and a[6] = 872 (i = 5 and j = 6).
 
 */
 
-const digitAnagrams = (a) => {
+function digitAnagrams(a) {
+    // let count = 0;
+    // let hash = {};
 
+    // for (let i = 0; i < a.lngth; i++) {
+    //     let num = a[i];
+    //     let key =
+    // }
+
+    // return count;
 }
+
+console.log(digitAnagrams([25, 35, 872, 228, 53, 278, 872])) // 4
+
