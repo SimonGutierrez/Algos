@@ -16,6 +16,7 @@ const findHighestId = (array) => {
                 interval[0] = interval[0] + Math.ceil((interval[1] - interval[0]) / 2);
             }
         }
+
         let row = interval[0];
         interval = [0, 7];
 

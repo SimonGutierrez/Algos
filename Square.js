@@ -1,8 +1,6 @@
 /* eslint-disable complexity */
 /* eslint-disable max-statements */
 
-const { off } = require('process');
-
 /*
 merge two strings together using the folling conditions:
 1) add the letter with the least amount of occuranses first
@@ -54,15 +52,12 @@ function mergeStrings(s1, s2) {
         } else if (dictS1[currLetterS1] > dictS2[currLetterS2]) {
             result += currLetterS2;
             pointerS2++;
-        } else if (s1.charCodeAt(pointerS1) < s2.charCodeAt(pointerS2)) {
+        } else if (s1.charCodeAt(pointerS1) <= s2.charCodeAt(pointerS2)) {
             result += currLetterS1;
             pointerS1++;
         } else if (s1.charCodeAt(pointerS1) > s2.charCodeAt(pointerS2)) {
             result += currLetterS2;
             pointerS2++;
-        } else {
-            result += currLetterS1;
-            pointerS1++;
         }
     }
 
