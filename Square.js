@@ -334,3 +334,46 @@ function digitAnagrams(a) {
 
 console.log(digitAnagrams([25, 35, 872, 228, 53, 278, 872])) // 4
 
+
+/*
+find longest arithmitic Progression: find the AP in array A and B to from a longer array; if no array can be made return -1;
+
+where arithmitic Progression = a{n) = a(1) + (n-1)d;
+
+Example:
+A = [0, 4, 8, 16]
+B = [0, 2, 6, 12, 14, 20]
+
+output = 6 => [0, 4, 8, 12, 16, 20]
+
+*/
+
+/*
+sub matrix finder - in a grid KxK find a square MxM that has the largest sum; if multiple squares have the max sum  of only one, add all UNIQUE nums together,
+
+example : [
+    [1, 2, 3, 4, 5],
+    [1, 2, 3, 4, 5],
+    [1, 2, 3, 4, 5],
+    [1, 2, 3, 4, 5],
+    [1, 2, 3, 4, 5],
+]
+
+outPut = 10 (1 + 2 + 3 + 4) 4x4;
+
+*/
+
+/*
+PalindromeCutter:
+
+cut a string down by its longest palen until it has no more palendromes in it;
+
+ex: 'aaacdedce' => 'codedoc' => ''
+
+output = '';
+
+ex: 'codesignal'
+
+output = 'codesignal'
+
+*/
