@@ -40,22 +40,16 @@ function mergeStrings(s1, s2) {
         let currLetterS1 = s1[pointerS1];
         let currLetterS2 = s2[pointerS2];
 
-        if (!s1[pointerS1]) {
+        if (!currLetterS1 || dictS1[currLetterS1] > dictS2[currLetterS2]) {
             result += currLetterS2;
             pointerS2++;
-        } else if (!s2[pointerS2]) {
+        } else if (!currLetterS2 || dictS1[currLetterS1] < dictS2[currLetterS2]) {
             result += currLetterS1;
             pointerS1++;
-        } else if (dictS1[currLetterS1] < dictS2[currLetterS2]) {
-            result += currLetterS1;
-            pointerS1++;
-        } else if (dictS1[currLetterS1] > dictS2[currLetterS2]) {
-            result += currLetterS2;
-            pointerS2++;
         } else if (s1.charCodeAt(pointerS1) <= s2.charCodeAt(pointerS2)) {
             result += currLetterS1;
             pointerS1++;
-        } else if (s1.charCodeAt(pointerS1) > s2.charCodeAt(pointerS2)) {
+        } else {
             result += currLetterS2;
             pointerS2++;
         }
@@ -64,7 +58,7 @@ function mergeStrings(s1, s2) {
     return result;
 }
 
-const test1 = 'dce';
+// const test1 = 'dce';
 // const test2 = 'cccbd';
 // console.log(mergeStrings(test1, test2)) // 'dcecccbd'
 
@@ -159,12 +153,12 @@ const concatenationsSum3 = (a) => {
 }
 
 
-console.log(concatenationsSum([10, 2])) // 1344
-console.log(concatenationsSum([8])) // 88
-console.log(concatenationsSum([1, 2, 3])) // 198
-console.log(concatenationsSum2([10, 2])) // 1344
-console.log(concatenationsSum2([8])) // 88
-console.log(concatenationsSum2([1, 2, 3])) // 198
+// console.log(concatenationsSum([10, 2])) // 1344
+// console.log(concatenationsSum([8])) // 88
+// console.log(concatenationsSum([1, 2, 3])) // 198
+// console.log(concatenationsSum2([10, 2])) // 1344
+// console.log(concatenationsSum2([8])) // 88
+// console.log(concatenationsSum2([1, 2, 3])) // 198
 
 
 /*
@@ -193,9 +187,9 @@ outPut: [
 const rotateAndApplyGrav = (grid) => {
     // create our empty matrix with the right dimensions (aka original rotated 90 deg)
     let rotatedGrid = new Array(grid[0].length).fill().map(() => new Array(grid.length));
-    // starting point in our new rotated grid
+    // starting point for our new rotated grid
     let rotatedCol = rotatedGrid[0].length - 1;
-    // fill in our rotated grid in the right order, fill in the rotated grid with vals from original grid col by col but starting from the end and working your way back, from the top of the last col moving down by rows, then once filled move to the next col to the left, repeat this process until the entire grid is filled. The original grid will be itterated through in normal order row by row.
+    // fill in our rotated grid in the right order, fill in the rotated grid with vals from original grid col by col but starting from the end and working your way back, from the top of the last col (grid[0][grid[0].length]) moving down by rows, then once filled move to the next col to the left, repeat this process until the entire grid is filled. The original grid will be itterated through in normal order.
     for (let i = 0; i < grid.length; i++) {
         let row = grid[i];
         for (let j = 0; j < row.length; j++) {
@@ -240,13 +234,13 @@ let input = [
     ['*', '#', ''],
 ]
 
-console.log(rotateAndApplyGrav(input));
+// console.log(rotateAndApplyGrav(input));
 
-let twice = rotateAndApplyGrav(input);
-console.log(rotateAndApplyGrav(twice));
+// let twice = rotateAndApplyGrav(input);
+// console.log(rotateAndApplyGrav(twice));
 
-let thrice = rotateAndApplyGrav(twice);
-console.log(rotateAndApplyGrav(thrice));
+// let thrice = rotateAndApplyGrav(twice);
+// console.log(rotateAndApplyGrav(thrice));
 
 
 /*
@@ -304,7 +298,7 @@ function hashMap(queryType, query) {
 let testQ1 = ['insert', 'insert', 'addToValue', 'addToKey', 'get'];
 let testQ2 = [[1, 2], [2, 3], [2], [1], [3]];
 
-console.log(hashMap(testQ1, testQ2))
+// console.log(hashMap(testQ1, testQ2)) // 5
 
 /*
 Example
@@ -332,7 +326,7 @@ function digitAnagrams(a) {
     // return count;
 }
 
-console.log(digitAnagrams([25, 35, 872, 228, 53, 278, 872])) // 4
+// console.log(digitAnagrams([25, 35, 872, 228, 53, 278, 872])) // 4
 
 
 /*
@@ -349,7 +343,7 @@ output = 6 => [0, 4, 8, 12, 16, 20]
 */
 
 /*
-sub matrix finder - in a grid KxK find a square MxM that has the largest sum; if multiple squares have the max sum  of only one, add all UNIQUE nums together,
+sub matrix finder - in a grid KxK find a square MxM that has the largest sum; if multiple squares have the max sum of only one, add all UNIQUE nums together,
 
 example : [
     [1, 2, 3, 4, 5],
@@ -366,9 +360,9 @@ outPut = 10 (1 + 2 + 3 + 4) 4x4;
 /*
 PalindromeCutter:
 
-cut a string down by its longest palen until it has no more palendromes in it;
-
-ex: 'aaacdedce' => 'codedoc' => ''
+cut a string down by its longest consecutive palen until it has no more palendromes in it;
+        1       =>      2    => 3
+ex: 'aaacodedoc' => 'codedoc' => ''
 
 output = '';
 
@@ -377,3 +371,7 @@ ex: 'codesignal'
 output = 'codesignal'
 
 */
+
+const paliCutter = (string) => {
+
+}
