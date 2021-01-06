@@ -374,4 +374,43 @@ output = 'codesignal'
 
 const paliCutter = (string) => {
 
+    const isPali = (left, right) => {
+        let tempL = left;
+        let tempR = right;
+
+        while (tempL < tempR) {
+            if (string[tempL] !== string[tempR]) return false;
+
+            tempL++;
+            tempR--;
+        }
+
+        return true;
+    }
+
+    let left = 0;
+
+    while (left < string.length) {
+        let right = string.length - 1;
+
+        while (left < right) {
+            if (isPali(left, right)) {
+                string = string.slice(0, left) + string.slice(right + 1);
+                left = 0;
+                right = string.length - 1;
+            } else {
+                right--;
+            }
+        }
+
+        left++;
+    }
+
+    return string;
 }
+
+console.log(paliCutter('aaacodedoc')) // ''
+console.log(paliCutter('codesignal')) // 'codesignal'
+console.log(paliCutter('codaaab')) // 'codb'
+console.log(paliCutter('a')) // 'a'
+
