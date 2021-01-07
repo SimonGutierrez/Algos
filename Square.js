@@ -375,14 +375,11 @@ output = 'codesignal'
 const paliCutter = (string) => {
 
     const isPali = (left, right) => {
-        let tempL = left;
-        let tempR = right;
+        while (left < right) {
+            if (string[left] !== string[right]) return false;
 
-        while (tempL < tempR) {
-            if (string[tempL] !== string[tempR]) return false;
-
-            tempL++;
-            tempR--;
+            left++;
+            right--;
         }
 
         return true;
