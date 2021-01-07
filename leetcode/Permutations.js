@@ -83,5 +83,43 @@ const checkInclusionII = (s1, s2) => {
     return false;
 }
 
-console.log(checkInclusionII('ab', 'eidbaooo')) // true
+// console.log(checkInclusionII('ab', 'eidbaooo')) // true
 
+//personal OP
+const checkInclusionIII = (s1, s2) => {
+    if (s1.length > s2.length) return false;
+
+    const S1Tble = new Array(26).fill(0);
+    const WindowTble = new Array(26).fill(0);
+
+    for (let char of s1) {
+        const idx = char.charCodeAt() - 97;
+        S1Tble[idx]++;
+    }
+
+    for (let i = 0; i < s1.length; i++) {
+        const idx = s2[i].charCodeAt() - 97;
+        WindowTble[idx]++;
+    }
+
+    let left = 0;
+    let right = s1.length - 1;
+
+    while (right < s2.length) {
+        if (S1Tble.join('') === WindowTble.join('')) return true;
+
+        right++;
+
+        if (right === s2.length) break;
+
+        const leftIdx = s2[left].charCodeAt() - 97;
+        const rightIdx = s2[right].charCodeAt() - 97;
+        WindowTble[leftIdx]--;
+        WindowTble[rightIdx]++;
+        left++;
+    }
+
+    return false;
+}
+
+console.log(checkInclusionIII('ab', 'eidbaooo')) // true
