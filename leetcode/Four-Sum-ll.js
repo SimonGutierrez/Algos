@@ -24,35 +24,35 @@ The two tuples are:
 */
 
 const fourSumCount = (A, B, C, D) => {
-    let counter = 0;
-    let newList = [...A, ...B, ...C, ...D];
-    newList.sort((a, b) => a - b);
+    // solve for two sum first
+    const twoSum = (list1, list2) => {
+        let map = new Map();
 
-    for (let i = 0; i < newList.length - 3; i++) {
-        for (let j =  i + 1; j < newList.length - 2; j++) {
-            let k = j + 1;
-            let l = newList.length - 1;
-            while (k < l) {
-                let sum = newList[i] + newList[j] + newList[k] + newList[l];
-                if (sum === 0) {
-                    console.log(i, j, k, l)
-                    counter++;
-                    while (newList[k] === newList[k + 1]) k++;
-                    while (newList[l] === newList[l - 1]) l--;
-                    k++;
-                    l--;
-                } else if (sum > 0) {
-                    l--;
-                } else {
-                    k++;
-                }
+        for (let i = 0; i < list1.length; i++) {
+            for (let j = 0; j < list2.length; j++){
+                let sum = list1[i] + list2[j];
+                let freq = map.has(sum) ? map.get(sum) + 1 : 1;
+                map.set(sum, freq)
             }
-            while (newList[j] === newList[j + 1]) j++;
         }
-        while (newList[i] === newList[i + 1]) i++;
+
+        return map;
     }
 
-    return counter;
+    let sum1 = twoSum(A, B);
+    let sum2 = twoSum(C, D);
+    let total = 0;
+
+    sum1.forEach((value, key) => {
+        let offSet = 0 - key;
+
+        if (sum2.has(offSet)) {
+            let sum1Sum2Freq = sum2.get(offSet) * sum1.get(key);
+            total += sum1Sum2Freq;
+        }
+    });
+
+    return total;
 };
 
 const A = [ 1, 2];

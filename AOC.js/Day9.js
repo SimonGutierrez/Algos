@@ -81,59 +81,67 @@ function findFirstDifferent(arr){
     }
   }
 
-
-  function findFirstDifferentII(arr){
-
-    const integers = arr.map(ele => Number(ele));
-    const windowSize = 25;
-
-    for (let i = windowSize; i < integers.length; i++) {
-      const previousNums = windowSize;
-      const currentNum = integers[i];
-      const numbersSeen = {};
-      let foundCompliment = false; //set flag
-
-      for (let j = i - previousNums; j < i; j++) {
-        if (!numbersSeen[integers[j]]) {
-          numbersSeen[integers[j]] = true;
-        }
-      }
-
-      for (let num in numbersSeen) {
-        if (numbersSeen[currentNum - Number(num)]) {
-          foundCompliment = true;
-        }
-      }
-
-      if (!foundCompliment){
-        return currentNum
-      }
-    }
-  }
-
   const findFirstDifferentII = (array, target) => {
     array = array.map(ele => Number(ele));
+    // second solution OP
+    let left = 0;
+    let right = 1;
+    let sum = array[left];
 
-    for (let i = 0; i < array.length; i++) {
-      let currSum = array[i];
-      let res = [array[i]];
-      for (let j = i + 1; j < array.length; j++) {
-        let nextNum = array[j];
-        if (currSum + nextNum <= target) {
-          currSum += nextNum;
-          res.push(nextNum);
+    while (right < array.length) {
+        if (sum < target) {
+            sum += array[right];
+            right++;
+        } else if (sum > target || array[left] === target) {
+            sum -= array[left];
+            left++;
         } else {
-          break;
+            // not slice to right + 1 bc we already added 1 to right when sum is < target;
+            let res = array.slice(left, right);
+            return Math.min(...res) + Math.max(...res);
         }
-
-        if (currSum === target) {
-          return Math.min(...res) + Math.max(...res);
-        }
-
-      }
     }
+
+    // for (let i = 0; i < array.length; i++) {
+    //   let currSum = array[i];
+    //   let res = [array[i]];
+    //   for (let j = i + 1; j < array.length; j++) {
+    //     let nextNum = array[j];
+    //     if (currSum + nextNum <= target) {
+    //       currSum += nextNum;
+    //       res.push(nextNum);
+    //     } else {
+    //       break;
+    //     }
+
+    //     if (currSum === target) {
+    //       return Math.min(...res) + Math.max(...res);
+    //     }
+
+    //   }
+    // }
   }
 
+  const test = `35
+  20
+  15
+  25
+  47
+  40
+  62
+  55
+  65
+  95
+  102
+  117
+  150
+  182
+  127
+  219
+  299
+  277
+  309
+  576`
 
   const input = `45
   6
@@ -1136,9 +1144,10 @@ function findFirstDifferent(arr){
   62642343072880
   60354832330196`
 
-  const parsed = input.split('\n')
+  const parsed = input.split('\n');
+  const testIP = test.split('\n');
   // console.log(parsed)
   console.log(findFirstDifferent(parsed));
-  const sol1 = findFirstDifferent(parsed);
-  console.log(findFirstDifferentII(sol1));
+  const prevSol = findFirstDifferent(parsed);
+  console.log(findFirstDifferentII(parsed, prevSol));
 
