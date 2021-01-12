@@ -26,7 +26,7 @@ const asteroidCollision = (asteroids) => {
 }
 
 // Time: O(N) numeber of asteroids to loop through;
-// Space: O(N) number of asteroids to save in slack;
+// Space: O(N) number of asteroids to save in stack;
 
 const test1 = [5, 10, -5];
 const test2 = [8, -8];
@@ -89,3 +89,32 @@ const simpleSolution = (asteroids) => {
 }
 
 console.log(simpleSolution(test6)) // [-2,-2,-2]
+
+// second attempt
+var asteroidCollisionII = function(asteroids) {
+    let stack = [asteroids[0]];
+
+    for (let i = 1; i < asteroids.length; i++) {
+        let curr = asteroids[i];
+        let peek = stack[stack.length - 1];
+
+        if (peek > 0 && curr < 0) {
+            if (peek + curr < 0) {
+                while (peek + curr < 0 && peek > 0) {
+                    stack.pop();
+                    peek = stack[stack.length - 1];
+                }
+
+                if (peek + curr < 0 || peek === undefined) stack.push(curr);
+
+                if (peek + curr === 0) stack.pop();
+            } else if (peek + curr === 0) {
+                stack.pop();
+            }
+        } else {
+            stack.push(curr);
+        }
+    }
+
+    return stack;
+};
