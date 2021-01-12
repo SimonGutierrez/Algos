@@ -1,4 +1,37 @@
 /* eslint-disable complexity */
+// https://leetcode.com/problems/valid-anagram/
+// basic anagram validation
+const isAnagram = (s, t)  => {
+    if (s.length !== t.length) return false;
+
+    let hash = {};
+    let uniqueChars = 0;
+
+    for (let char of s) {
+        if (hash[char] === undefined) {
+            hash[char] = 1;
+            uniqueChars++;
+        } else {
+            hash[char]++;
+        }
+    }
+
+    for (let char2 of t) {
+        if (hash[char2]) {
+            hash[char2]--;
+            if (hash[char2] === 0) {
+                uniqueChars--;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    return uniqueChars === 0;
+};
+
+console.log(isAnagram('anagram', 'nagaram')) // true;
+
 // leet code link: https://leetcode.com/problems/find-all-anagrams-in-a-string/
 
 const findAnagrams = (s, p) => {
