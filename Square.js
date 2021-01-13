@@ -1,3 +1,4 @@
+/* eslint-disable guard-for-in */
 /* eslint-disable complexity */
 /* eslint-disable max-statements */
 
@@ -406,8 +407,68 @@ const paliCutter = (string) => {
     return string;
 }
 
-console.log(paliCutter('aaacodedoc')) // ''
-console.log(paliCutter('codesignal')) // 'codesignal'
-console.log(paliCutter('codaaab')) // 'codb'
-console.log(paliCutter('a')) // 'a'
+// console.log(paliCutter('aaacodedoc')) // ''
+// console.log(paliCutter('codesignal')) // 'codesignal'
+// console.log(paliCutter('codaaab')) // 'codb'
+// console.log(paliCutter('a')) // 'a'
 
+
+/*
+Create a function that outputs a leaderboard sorted by customers who have spent the most at a shop
+
+input:
+   name - price - months from today
+ - Alison,   9,     2
+ - Charlie, 12,     2
+ - Bob,     10,     1
+ - Alison,   5,     1
+ - Dave,     5,     1
+
+Task 1:
+- create a function to take in one trans action at a time
+
+Task 2:
+- create a sorted leaderboard by top paying customer
+
+Task 3:
+- also filter these customers by most relevant by time of most recent purchase
+*/
+
+const updateLB = (transaction, lb) => {
+    let [name, price, time] = transaction;
+
+    if (lb[name]) {
+        lb[name].price = lb[name].price + price;
+        lb[name].time = time;
+    } else {
+        lb[name] = {};
+        lb[name].price = price;
+        lb[name].time = time;
+    }
+}
+
+const sortLB = (lb) => {
+    let sorted = [];
+
+    for (let key in lb) {
+        let customer = {name: key, ...lb[key]}
+        sorted.push(customer)
+    }
+
+    let filtered = sorted.filter((elem) => elem.time === 1);
+
+    filtered.sort((a, b) => b.price - a.price);
+
+    return filtered;
+}
+
+let leaderboard = {};
+
+updateLB(['Alison', 9, 2], leaderboard);
+updateLB(['Charlie', 12, 2], leaderboard);
+updateLB(['Bob', 10, 1], leaderboard);
+updateLB(['Alison', 5, 1], leaderboard);
+updateLB(['Dave', 5, 1], leaderboard);
+
+console.log(leaderboard);
+console.log(sortLB(leaderboard));
