@@ -55,10 +55,6 @@ The answer output can be returned in any order.
 
  */
 
-let test1 = ['9001 discuss.leetcode.com'];
-let test2 = ['900 google.mail.com', '50 yahoo.com', '1 intel.mail.com', '5 wiki.org'];
-
-
 const subdomainVisits = (array) => {
     let domainMap = makeMap(array);
 
@@ -76,7 +72,7 @@ const subdomainVisits = (array) => {
           if (i !== splitDomain.length - 1 ) {
             concatDomain = curr + '.' + concatDomain;
           } else {
-            concatDomain = curr +  concatDomain;
+            concatDomain = curr + concatDomain;
           }
           if (!map.has(concatDomain)) {
             map.set(concatDomain, Number(num));
@@ -91,7 +87,10 @@ const subdomainVisits = (array) => {
   }
 
 // Time: O(N) for the number of domains;
-// Space: O(N) for the map saved;
+// Space: O(N) for the domains saved in the map;
 
-console.log(subdomainVisits(test1))
-console.log(subdomainVisits(test2))
+let test1 = ['9001 discuss.leetcode.com'];
+let test2 = ['900 google.mail.com', '50 yahoo.com', '1 intel.mail.com', '5 wiki.org'];
+
+console.log(subdomainVisits(test1)) // ["9001 discuss.leetcode.com", "9001 leetcode.com", "9001 com"]
+console.log(subdomainVisits(test2)) // ["901 mail.com","50 yahoo.com","900 google.mail.com","5 wiki.org","5 org","1 intel.mail.com","951 com"]

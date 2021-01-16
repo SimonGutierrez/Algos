@@ -93,7 +93,6 @@ RandomizedSet.prototype.remove = function(val) {
  */
 RandomizedSet.prototype.getRandom = function() {
     let randomIndx = Math.floor(Math.random() * this.map.size);
-    console.log('randomIndx', randomIndx)
     return this.values[randomIndx];
 };
 
