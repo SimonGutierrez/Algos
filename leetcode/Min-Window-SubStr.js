@@ -20,6 +20,7 @@ const minWindow = (str, targets) => {
         if (str[right] in counts) {
 
             // if that counts is ever 0 we just found a letter so subtract one from missing bc we just found a letter
+            // *** fix this part to take in mult same letters ***
             if (counts[str[right]] === 0) {
                 missing -= 1;
             }

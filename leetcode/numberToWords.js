@@ -30,42 +30,46 @@ const numberToWords = (num) => {
         19: 'Nineteen',
     }
 
-    const tens = {
+    const dozens = {
         2: 'Twenty',
         3: 'Thirty',
         4: 'Forty',
         5: 'Fifty',
+        6: 'Sixty',
+        7: 'Seventy',
         8: 'Eighty',
+        9: 'Ninety',
     }
 
-    let parsed = [];
-    let res = '';
+    const tensPlace = (string, addSpace) => {
+        let tensStr = '';
 
-    const subNumtoWord = (str) => {
-        let temp = ''
+        if (string !== '00') {
+            if (addSpace) tensStr += ' ';
 
-        if (str.length === 1) temp += ones[str];
-
-        const tensPlace = (string, addSpace) => {
-            if (string !== '00') {
-                if (addSpace) temp += ' ';
-
-                if (teens[string]) {
-                    temp += teens[string];
-                } else {
-                    let holder = tens[string[0]] ? tens[string[0]] : ones[string[0]] + 'ty';
-                    if (string[1] !== '0' && string[0] !== '0') {
-                        temp += `${holder} ${ones[string[1]]}`;
-                    } else if (string[1] === '0' && string[0] !== '0') {
-                        temp += `${holder}`;
-                    } else if (string[1] !== '0' && string[0] === '0') {
-                        temp += ones[string[1]];
-                    }
+            if (teens[string]) {
+                tensStr += teens[string];
+            } else {
+                let holder = dozens[string[0]];
+                if (string[1] !== '0' && string[0] !== '0') {
+                    tensStr += `${holder} ${ones[string[1]]}`;
+                } else if (string[1] === '0' && string[0] !== '0') {
+                    tensStr += `${holder}`;
+                } else if (string[1] !== '0' && string[0] === '0') {
+                    tensStr += ones[string[1]];
                 }
             }
         }
 
-        if (str.length === 2) tensPlace(str, false);
+        return tensStr;
+    }
+
+    const subNumtoWord = (str) => {
+        let temp = '';
+
+        if (str.length === 1) temp = ones[str];
+
+        if (str.length === 2) temp = tensPlace(str, false);
 
         if (str.length === 3) {
             let input = true;
@@ -77,14 +81,13 @@ const numberToWords = (num) => {
 
             let remainingStr = str[1] + str[2];
 
-            tensPlace(remainingStr, input);
+            temp += tensPlace(remainingStr, input);
         }
 
         return temp;
     }
 
-    let partial = '';
-    let count = 0;
+    let parsed = [], partial = '', count = 0, res = '';
 
     for (let i = num.length - 1; i >= 0 ; i--) {
         count++;
@@ -103,6 +106,7 @@ const numberToWords = (num) => {
         if (parsed[j] === '000') continue;
 
         let word = subNumtoWord(parsed[j]);
+
         if (res.length) res = ' ' + res;
 
         if (j === 1) {
@@ -124,7 +128,7 @@ const num2 = 12345;
 const num3 = 1234567;
 const num4 = 1234567891;
 
-console.log(numberToWords(num1)) // One Hundred Twenty Three
-console.log(numberToWords(num2)) // Twelve Thousand Three Hundred Forty Five
-console.log(numberToWords(num3)) // One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven
-console.log(numberToWords(num4)) // One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Thousand Eight Hundred Ninety One
+console.log(numberToWords(num1) === 'One Hundred Twenty Three');
+console.log(numberToWords(num2) === 'Twelve Thousand Three Hundred Forty Five');
+console.log(numberToWords(num3) === 'One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven');
+console.log(numberToWords(num4) === 'One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Thousand Eight Hundred Ninety One');
