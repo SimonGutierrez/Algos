@@ -7,17 +7,17 @@ const validateStackSequences = (pushed, popped) => {
     for (let i = 0 ; i < pushed.length; i++) {
         stack.push(pushed[i]);
 
-        let peek = stack[stack.length - 1];
-
-        while (peek === popped[popPointer] && stack.length) {
+        while (stack.length && stack[stack.length - 1] === popped[popPointer]) {
             stack.pop();
             popPointer++;
-            peek = stack[stack.length - 1];
         }
     }
 
     return stack.length === 0;
 };
+
+// Time: O(N) - where N is the length of pushed and poped items
+// Space: O(N) - saving your own stack with N elems
 
 console.log(validateStackSequences([1, 2, 3, 4, 5], [4, 5, 3, 2, 1])) // true
 console.log(validateStackSequences([1, 2, 3, 4, 5], [4, 3, 5, 1, 2])) // false
