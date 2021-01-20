@@ -206,7 +206,7 @@ const findNextLetter = (letter, grid, row, col) => {
             chars.push([newRow, newCol]);
         }
     }
-
+// there has to be a recursive call here if chars.length i greater than 1;
     if (chars.length) {
         return chars;
     } else {
