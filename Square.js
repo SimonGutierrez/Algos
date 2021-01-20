@@ -470,5 +470,115 @@ updateLB(['Bob', 10, 1], leaderboard);
 updateLB(['Alison', 5, 1], leaderboard);
 updateLB(['Dave', 5, 1], leaderboard);
 
-console.log(leaderboard);
-console.log(sortLB(leaderboard));
+// console.log(leaderboard);
+// console.log(sortLB(leaderboard));
+
+
+/*
+Round2: use a trie to store and retrieve data
+
+write two methods for the trie:
+
+insert:
+    - input: ipAdress: '10', port: 3;
+    - output:
+        trie -
+            root
+            /  \
+           0    1
+                /
+               0 - 3
+
+    - input: ipAdress: '0101', port: 10;
+    - ouput:
+            root
+            /  \
+           0    1
+           \     /
+            1   0 - 3
+            /
+           0
+            \
+             1 - 10
+
+    - input: ipAdress: '1111', port: 8;
+    - ouput:
+              root
+            /     \
+           0       1
+           \    /    \
+            1  0 - 3   1
+            /           \
+           0             1
+            \             \
+             1 - 10        1 - 8
+
+get: retrieve the closest avail port to string input
+    - input('101010');
+    - output: 3
+*/
+
+class Node {
+    constructor(left, right, val) {
+        this.left = left;
+        this.right = right;
+        this.val = val;
+    }
+}
+
+class Trie {
+    constructor() {
+        this.root = new Node();
+    }
+
+    insert(ipAdress, port) {
+        let currNode = this.root;
+
+        for (let i = 0; i < ipAdress.length; i++) {
+
+            if (ipAdress[i] === '0' ) {
+                if (currNode.left === undefined) currNode.left = new Node();
+                currNode = currNode.left;
+            }
+
+            if (ipAdress[i] === '1' ) {
+                if (currNode.right === undefined) currNode.right = new Node();
+                currNode = currNode.right;
+            }
+        }
+
+        currNode.val = port;
+    }
+
+    get(ipAdress) {
+        let curNode = this.root;
+
+        for (let i = 0; i < ipAdress.length; i++) {
+            let char = ipAdress[i];
+
+            if (char === '0') {
+                curNode = curNode.left;
+            } else {
+                curNode = curNode.right;
+            }
+
+            if (curNode.val) return curNode.val;
+        }
+    }
+}
+
+const myTrie = new Trie();
+
+myTrie.insert('10', 3);
+
+console.log(myTrie.root.right.left.val) // 3
+
+myTrie.insert('0101', 10);
+
+console.log(myTrie.root.left.right.left.right.val); // 10
+
+myTrie.insert('1111', 8);
+
+console.log(myTrie.root.right.right.right.right.val); // 8
+
+console.log(myTrie.get('101010')) // 3
