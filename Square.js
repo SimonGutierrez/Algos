@@ -571,7 +571,7 @@ const myTrie = new Trie();
 
 myTrie.insert('10', 3);
 
-console.log(myTrie.root.right.left.val) // 3
+console.log(myTrie.root.right.left.val); // 3
 
 myTrie.insert('0101', 10);
 
@@ -581,4 +581,4 @@ myTrie.insert('1111', 8);
 
 console.log(myTrie.root.right.right.right.right.val); // 8
 
-console.log(myTrie.get('101010')) // 3
+console.log(myTrie.get('101010')); // 3

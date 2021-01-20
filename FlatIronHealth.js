@@ -67,3 +67,48 @@ let prices1 = [ 1, 2, 1, 1];
 let weights1 = [ 2, 2, 2, 2];
 
 console.log(findDoups(names1, prices1, weights1)) // 2
+
+
+/*
+2D Matrix:
+    - find all avail moves for a certain start point
+    - valid moves right, down, left, up
+    - pos avail only if board[r][c] === 0
+    - return all avail moves in an array
+*/
+
+const board1 = [
+    [0,  0,  0, -1,  -1],
+    [0,  0, -1,  0,   0],
+    [0, -1,  0, -1,   0],
+    [0,  0, -1,  0,   0],
+    [0,  0,  0,  0,   0],
+    [0,  0,  0,  0,   0],
+    [0,  0,  0,  0,   0],
+];
+
+const start1 = [1, 1];
+const start2 = [5, 3];
+const start3 = [6, 0];
+
+const findAvailMoves = (board, start) => {
+    let res = [];
+
+    const posDirRow = [0, 1, 0, -1];
+    const posDirCol = [1, 0, -1, 0];
+
+    for (let i = 0; i < posDirCol.length; i++) {
+        let [row, col] = start;
+        let nextMove = [row + posDirRow[i], col + posDirCol[i]];
+
+        if (board[nextMove[0]] !== undefined) {
+            if (board[nextMove[0]][nextMove[1]] === 0) res.push(nextMove);
+        }
+    }
+
+    return res;
+}
+
+console.log(findAvailMoves(board1, start1)) // [ [1, 0], [0, 1] ]
+console.log(findAvailMoves(board1, start2)) // [ [ 5, 4 ], [ 6, 3 ], [ 5, 2 ], [ 4, 3 ] ]
+console.log(findAvailMoves(board1, start3)) // [ [ 6, 1 ], [ 5, 0 ] ]
