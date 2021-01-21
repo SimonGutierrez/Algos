@@ -27,7 +27,7 @@ function findJudge(n, pairs) {
   console.log(findJudge(4, [[1, 3], [1, 4], [2, 3], [2, 4], [4, 3]])) // 3
 
 
-  // second attempt
+  // second attempt using a graph, slower time
 
   const findJudgeII = function(N, trust) {
     if (trust.length === 0 && N !== 1) return -1;
