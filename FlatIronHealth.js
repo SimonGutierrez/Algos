@@ -164,6 +164,13 @@ const findBoxes = (board) => {
 }
 
 console.log(findBoxes(board2))
+/*
+[
+    [ [ 0, 0 ], [ 0, 0 ] ],
+    [ [ 2, 3 ], [ 3, 5 ] ],
+    [ [ 4, 0 ], [ 4, 1 ] ],
+]
+*/
 
 
 /* Your students are getting craftier and hiding words in 2D grids of letters. The word may start anywhere in the grid, and consecutive letters can be either immediately below or immediately to the right of the previous letter.
@@ -207,6 +214,7 @@ const findNextLetter = (letter, grid, row, col) => {
         }
     }
 // there has to be a recursive call here if chars.length i greater than 1;
+// maybe use a stack to control what pos to check to make sure you look at every single poss path;
     if (chars.length) {
         return chars;
     } else {
@@ -250,3 +258,25 @@ const findWordInGrid = (grid, word) => {
     return res;
 }
 
+/*
+- given an end point find if there is a valid path to that point from any open cell on the board
+
+*/
+const board3 = [
+    [ 0,  0,  0,  0, -1],
+    [ 0, -1, -1,  0,  0],
+    [ 0,  0,  0,  0,  0],
+    [-1, -1,  0,  0,  0],
+    [ 0, -1,  0,  0,  0],
+    [ 0, -1,  0,  0,  0],
+];
+
+const end1 = [0, 0] // true
+const end2 = [5, 0] // false
+
+
+const findValidPath = (board, endPt) => {
+// make a douplicate board with true is every open cell and false is every closed cell
+// if you can move up, left, right, or down mark as true;
+// compare your doup to OG and kaes sure every open cell is accounted for, if yes return true else return false
+}
