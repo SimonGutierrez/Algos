@@ -22,7 +22,6 @@ function findRoutes(temp, route, graph, res) {
     }
 }
 
-// console.log(findRoute([0], [1, 2], { 0: [1, 2], 1: [3], 2: [3]}, 3))
 const test1 = [[1, 2], [3], [3], []];
 
-console.log(allPathsSourceTarget(test1))
+console.log(allPathsSourceTarget(test1)) // [[0,1,3],[0,2,3]]

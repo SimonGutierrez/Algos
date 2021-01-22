@@ -48,7 +48,6 @@ function findJudge(n, pairs) {
     for (let i = 1; i <= N; i++) {
         if (graph.get(i).length === 0) {
             let isJudge = true;
-            console.log(i)
             graph.forEach((val, key) => {
                 if (!val.includes(i) && key !== i) isJudge = false;
             })
