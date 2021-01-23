@@ -550,7 +550,7 @@ class Trie {
         currNode.val = port;
     }
 
-    get(ipAdress) {
+    getClosestPort(ipAdress) {
         let curNode = this.root;
 
         for (let i = 0; i < ipAdress.length; i++) {
@@ -564,6 +564,27 @@ class Trie {
 
             if (curNode.val) return curNode.val;
         }
+    }
+
+    getClosestIp(ipAdress) {
+        let curNode = this.root;
+        let latestVal = this.root.val;
+
+        for (let i = 0; i < ipAdress.length; i++) {
+            let char = ipAdress[i];
+
+            if (!curNode) break;
+
+            if (curNode.val) latestVal = curNode.val;
+
+            if (char === '0') {
+                curNode = curNode.left;
+            } else {
+                curNode = curNode.right;
+            }
+        }
+
+        return latestVal;
     }
 }
 
@@ -581,4 +602,5 @@ myTrie.insert('1111', 8);
 
 console.log(myTrie.root.right.right.right.right.val); // 8
 
-console.log(myTrie.get('101010')); // 3
+console.log(myTrie.getClosestPort('101010')); // 3
+console.log(myTrie.getClosestIp('101010')); // 3
