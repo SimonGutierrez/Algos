@@ -603,4 +603,4 @@ myTrie.insert('1111', 8);
 console.log(myTrie.root.right.right.right.right.val); // 8
 
 console.log(myTrie.getClosestPort('101010')); // 3
-console.log(myTrie.getClosestIp('101010')); // 3
+console.log(myTrie.getClosestIp('111111')); // 8
