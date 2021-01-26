@@ -186,33 +186,33 @@ class MaxHeap {
 
         // rebalance heap
         let curIdx = 0;
-        const len = this.list.length
+        let elem = this.list[curIdx];
+        let len = this.list.length
 
         while ((curIdx * 2) + 1 < len || (curIdx * 2) + 2 < len) {
             let leftIdx = (curIdx * 2) + 1;
             let rightIdx = (curIdx * 2) + 2;
             let left = this.list[leftIdx];
             let right = this.list[rightIdx];
-            let elem = this.list[curIdx];
             let switchIdx = null;
 
-            if (left !== undefined) {
+            if (left) {
                 if (left.priority > elem.priority) {
                     switchIdx = leftIdx;
                 }
             }
 
-            if (right !== undefined) {
-                if (switchIdx && right.priority > this.list[switchIdx].priority || !switchIdx && right.priority > elem.priority) {
+            if (right) {
+                let swap = switchIdx ? this.list[switchIdx] : elem;
+                if (right.priority > swap.priority) {
                     switchIdx = rightIdx;
                 }
             }
 
             if (switchIdx === null) break;
 
-            let temp = this.list[switchIdx];
+            this.list[curIdx] = this.list[switchIdx];
             this.list[switchIdx] = elem;
-            this.list[curIdx] = temp;
             curIdx = switchIdx;
         }
 
