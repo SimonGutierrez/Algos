@@ -617,9 +617,7 @@ const topilogicalSort = (graph) => {
 
         if (visited[currNode]) continue;
 
-        if (!visited.has(currNode)) {
-            topilogical(visited, stack, currNode, graph)
-        }
+        topilogical(visited, stack, currNode, graph)
     }
 
     return stack.reverse();
