@@ -604,3 +604,37 @@ console.log(myTrie.root.right.right.right.right.val); // 8
 
 console.log(myTrie.getClosestPort('101010')); // 3
 console.log(myTrie.getClosestIp('111111')); // 8
+
+
+// Topilogicl Sort Pract
+
+const topilogicalSort = (graph) => {
+    let visited = {};
+    let stack = [];
+
+    for (let i = 0; i < graph.length; i++) {
+        let currNode = graph[i];
+
+        if (visited[currNode]) continue;
+
+        if (!visited.has(currNode)) {
+            topilogical(visited, stack, currNode, graph)
+        }
+    }
+
+    return stack.reverse();
+}
+
+const topilogical = (visited, stack, currNode, graph) => {
+    visited[currNode] = true;
+
+    for (let i = 0; i < graph[currNode].length; i++) {
+        let currChild = graph[currNode][i];
+
+        if (visited[currChild]) continue;
+
+        topilogical(visited, stack, currChild, graph)
+    }
+
+    stack.push(currNode)
+}

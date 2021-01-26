@@ -7,10 +7,10 @@ const climbStairs2 = (n) => {
     let numsArray = new Array(n + 1);
     numsArray[0] = 1;
     numsArray[1] = 1;
-
+    // fibinacci seq
     for (let i = 2; i <= n; i++) numsArray[i] = numsArray[i - 1] + numsArray[i - 2];
 
-    return numsArray[n]
+    return numsArray[n];
 };
 
 console.log(climbStairs2(2)) // 2

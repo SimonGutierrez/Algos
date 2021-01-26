@@ -1,9 +1,7 @@
 /* eslint-disable complexity */
 /* eslint-disable no-eq-null */
 /*
-Leet code Link: https://leetcode.com/problems/decode-ways/
-https://leetcode.com/problems/integer-to-english-words/
-https://leetcode.com/problems/palindrome-pairs/
+ https://leetcode.com/problems/decode-ways/
 */
 
 const numDecodings = (s) => {

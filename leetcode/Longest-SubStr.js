@@ -37,3 +37,6 @@ var longestSubstring = function(s, k) {
 // We are only considering lowercase alphaabets so maxUnique can be at most 26.
 // Therefore, Time complexity: O(26) * O(n) = O(n)
 // Space Complexity: O(26) = O(1)
+
+console.log(longestSubstring('aaabb', 3)) // 3
+console.log(longestSubstring('ababbc', 2)) // 5
