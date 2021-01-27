@@ -590,23 +590,23 @@ class Trie {
 
 const myTrie = new Trie();
 
-myTrie.insert('10', 3);
+// myTrie.insert('10', 3);
 
-console.log(myTrie.root.right.left.val); // 3
+// console.log(myTrie.root.right.left.val); // 3
 
-myTrie.insert('0101', 10);
+// myTrie.insert('0101', 10);
 
-console.log(myTrie.root.left.right.left.right.val); // 10
+// console.log(myTrie.root.left.right.left.right.val); // 10
 
-myTrie.insert('1111', 8);
+// myTrie.insert('1111', 8);
 
-console.log(myTrie.root.right.right.right.right.val); // 8
+// console.log(myTrie.root.right.right.right.right.val); // 8
 
-console.log(myTrie.getClosestPort('101010')); // 3
-console.log(myTrie.getClosestIp('111111')); // 8
+// console.log(myTrie.getClosestPort('101010')); // 3
+// console.log(myTrie.getClosestIp('111111')); // 8
 
 
-// Topilogicl Sort Pract
+// Topilogicl Sort Practice
 
 const topilogicalSort = (graph) => {
     let visited = {};
@@ -636,3 +636,102 @@ const topilogical = (visited, stack, currNode, graph) => {
 
     stack.push(currNode)
 }
+
+/*
+- Round 3:
+Q: define a class that mimics a cursor on a typing plateform.
+    - the class will have four methods on it - [, , toString, moveCursor]
+    - insert: insert a letter right before the cursor, increment cursor.
+    - backspace: delete a letter right before the cursor, decrement cursor.
+    - toString: return our concuring sentence in string format and with the cursor '|' in the right position.
+    - moveCursor: move the cursor one position to the left or the right.
+
+Example:
+    - insert('a')
+    - insert('b')
+    - insert('c')
+    - toString() // 'abc|'
+    - backspace()
+    - toString() // 'ab|'
+    - moveCursor('left')
+    - moveCursor('left')
+    - insert('c')
+    - toString() // 'c|ab'
+*/
+
+class TypeWriter {
+    constructor() {
+        this.sentence = [];
+        this.cursor = 0;
+    }
+
+    insert(char) {
+        let newSent = [];
+
+        for (let i = 0; i <= this.sentence.length; i++) {
+            let elem = this.sentence[i];
+            if (i === this.cursor) {
+                newSent.push(char);
+                newSent.push(elem);
+            } else {
+                newSent.push(elem);
+            }
+        }
+
+        this.cursor++;
+        this.sentence = newSent;
+    }
+
+    backspace() {
+
+        if (this.sentence.length) {
+            let newSent = [];
+            for (let i = 0; i < this.sentence.length; i++) {
+                let char = this.sentence[i];
+
+                if (i !== this.cursor - 1) newSent.push(char);
+            }
+
+            this.sentence = newSent;
+            this.cursor--;
+        }
+
+    }
+
+    toString() {
+        let newSent = [];
+
+        if (this.cursor === 0) newSent.push('|');
+
+        this.sentence.forEach((elem, index) => {
+            newSent.push(elem);
+            if (index + 1 === this.cursor) newSent.push('|');
+        });
+
+        return newSent.join('');
+    }
+
+    moveCursor(dir) {
+        if (dir === 'left' && this.cursor !== 0) this.cursor--;
+
+        if (dir === 'right' && this.cursor < this.sentence.length) this.cursor++;
+    }
+}
+
+let myTypeWriter = new TypeWriter();
+
+myTypeWriter.insert('a');
+myTypeWriter.insert('b');
+myTypeWriter.insert('c');
+console.log(myTypeWriter.toString()); // 'abc|'
+myTypeWriter.backspace();
+console.log(myTypeWriter.toString()); // 'ab|'
+myTypeWriter.moveCursor('left');
+myTypeWriter.moveCursor('left');
+console.log(myTypeWriter.toString(), myTypeWriter.cursor); // '|ab'
+myTypeWriter.insert('c');
+console.log(myTypeWriter.toString()); // 'c|ab'
+myTypeWriter.moveCursor('right');
+myTypeWriter.moveCursor('right');
+myTypeWriter.backspace();
+console.log(myTypeWriter.toString()); // 'ca|'
