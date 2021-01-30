@@ -668,11 +668,13 @@ class TypeWriter {
     insert(char) {
         let newSent = [];
 
-        for (let i = 0; i <= this.sentence.length; i++) {
+        if (!this.cursor) newSent.push(char);
+
+        for (let i = 0; i < this.sentence.length; i++) {
             let elem = this.sentence[i];
-            if (i === this.cursor) {
-                newSent.push(char);
+            if (i === this.cursor - 1) {
                 newSent.push(elem);
+                newSent.push(char);
             } else {
                 newSent.push(elem);
             }
@@ -680,6 +682,8 @@ class TypeWriter {
 
         this.cursor++;
         this.sentence = newSent;
+
+        return this;
     }
 
     backspace() {
@@ -696,6 +700,7 @@ class TypeWriter {
             this.cursor--;
         }
 
+        return this;
     }
 
     toString() {
@@ -715,23 +720,22 @@ class TypeWriter {
         if (dir === 'left' && this.cursor !== 0) this.cursor--;
 
         if (dir === 'right' && this.cursor < this.sentence.length) this.cursor++;
+
+        return this;
     }
 }
 
 let myTypeWriter = new TypeWriter();
 
-myTypeWriter.insert('a');
-myTypeWriter.insert('b');
-myTypeWriter.insert('c');
+myTypeWriter.insert('a').insert('b').insert('c');
 console.log(myTypeWriter.toString()); // 'abc|'
-myTypeWriter.backspace();
-console.log(myTypeWriter.toString()); // 'ab|'
+myTypeWriter.backspace().backspace();
+console.log(myTypeWriter.toString()); // 'a|'
 myTypeWriter.moveCursor('left');
-myTypeWriter.moveCursor('left');
-console.log(myTypeWriter.toString(), myTypeWriter.cursor); // '|ab'
-myTypeWriter.insert('c');
-console.log(myTypeWriter.toString()); // 'c|ab'
-myTypeWriter.moveCursor('right');
-myTypeWriter.moveCursor('right');
+console.log(myTypeWriter.toString()); // '|a', 0
+myTypeWriter.insert('c').insert('b');
+console.log(myTypeWriter.toString()); // 'cb|a'
+myTypeWriter.moveCursor('right').moveCursor('right');
+console.log(myTypeWriter.toString(), myTypeWriter.cursor, myTypeWriter.sentence); // 'cba|', 3
 myTypeWriter.backspace();
-console.log(myTypeWriter.toString()); // 'ca|'
+console.log(myTypeWriter.toString()); // 'cb|'

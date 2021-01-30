@@ -45,7 +45,7 @@ const isCheating = (words, string) => {
     }
 
     for (let i = 0; i < words.length; i++) {
-        let result = '', word = words[i], wordBank = {};
+        let word = words[i], wordBank = {}, count = 0;
 
         for (let char of word) {
             if (wordBank[char]) {
@@ -53,14 +53,12 @@ const isCheating = (words, string) => {
             } else {
                 wordBank[char] = 1;
             }
+
+            if (wordBank[char] <= stringBank[char]) count++;
         }
 
-        for (let j = 0; j < word.length; j++) {
-            let char = word[j];
-            if (stringBank[char] >= wordBank[char]) result += char;
-        }
 
-        if (result === word) return word;
+        if (count === word.length) return word;
     }
 
     return 'None';
@@ -216,6 +214,31 @@ const encyrpt = (message, row, col) => {
     return result;
   }
 
+const encryptII = (message, row, col) => {
+    let grid = new Array(row).fill().map(elem => new Array(col));
+    let pointer = 0;
+    let res = '';
+
+    for (let i = 0; i < grid.length; i++) {
+        let row = grid[i];
+        for (let j = 0; j < col; j++) {
+            row[j] = message[pointer];
+            pointer++;
+        }
+    }
+
+    for (let k = 0; k < col; k++) {
+        let curRow = 0;
+
+        while (curRow < row) {
+            res += grid[curRow][k];
+            curRow++;
+        }
+    }
+
+    return res;
+}
+
 const message = 'Hello World!';
 const r1 = 3;
 const c1 = 4;
@@ -245,13 +268,13 @@ r l d !
 */
 
 // console.log(encyrpt(message, r1, c1));
-// console.log(encyrpt(message, r1, c1) === 'Hore llWdlo!')
+console.log(encyrpt(message, r1, c1) === 'Hore llWdlo!')
 // console.log(encyrpt(message, r2, c2));
-// console.log(encyrpt(message, r2, c2) === 'HloWrdel ol!')
+console.log(encryptII(message, r2, c2) === 'HloWrdel ol!')
 // console.log(encyrpt(message, r3, c3));
-// console.log(encyrpt(message, r3, c3) === 'HWeolrllod !')
+console.log(encyrpt(message, r3, c3) === 'HWeolrllod !')
 // console.log(encyrpt(message2, r4, c4));
-// console.log(encyrpt(message2, r4, c4) === 'Ihv  ra aeaDem')
+console.log(encyrpt(message2, r4, c4) === 'Ihv  ra aeaDem')
 
 ///////////////////
 /*
