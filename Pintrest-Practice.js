@@ -40,7 +40,7 @@ const concatNames = (names, limit) => {
 // "" limit = 5
 //  "Ali, and 2 more"   limit = 18
 
-// console.log(concatNames(names1)); // "Alison, Bob, Flex,and Diana"
+// console.log(concatNames(names1)); // "Alison, Bob, Flex, and Diana"
 // console.log(concatNames(names1, 2)); // "Alison, Bob, and 2 more"
 // console.log(concatNames(names1, 3)); // "Alison, Bob, Flex, and 1 more"
 // console.log(concatNames(names1, 4)); // "Alison, Bob, and 2 more"
