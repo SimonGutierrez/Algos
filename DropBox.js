@@ -92,7 +92,8 @@ const findShady = (twoDArray) => {
     return redFlags;
 }
 
-console.log(findShady(badge_times))
+// console.log(findShady(badge_times))
+
 /*
 Hard:
 
@@ -123,3 +124,45 @@ For this input data:
 The group "Jennifer, John, Paul" exists at both of these times, and is the largest group that exists multiple times.
 You should note that the group is a subset of the people in the room from 1230 to 1235
 */
+
+const badge_records = [
+    ['Paul',     '1214', 'enter'],
+    ['Paul',      '830', 'enter'],
+    ['Curtis',   '1100', 'enter'],
+    ['Paul',      '903', 'exit'],
+    ['John',      '908', 'exit'],
+    ['Paul',     '1235', 'exit'],
+    ['Jennifer',  '900', 'exit'],
+    ['Curtis',   '1330', 'exit'],
+    ['John',      '815', 'enter'],
+    ['Jennifer', '1217', 'enter'],
+    ['Curtis',    '745', 'enter'],
+    ['John',     '1230', 'enter'],
+    ['Jennifer',  '800', 'enter'],
+    ['John',     '1235', 'exit'],
+    ['Curtis',    '810', 'exit'],
+    ['Jennifer', '1240', 'exit'],
+  ]
+
+const findGroup = (twoDArray) => {
+    twoDArray.sort((a, b) => a[1] - b[1]);
+    let groups = new Map();
+    let subGroups = {};
+    let start, end;
+
+    for (let [name, time, state] of twoDArray) {
+        if (state === 'enter') {
+            start = time;
+            subGroups[name] = 1;
+        } else {
+            end = time;
+            groups.set(Object.keys(subGroups).join(', '), [start, end])
+            delete subGroups[name];
+        }
+    }
+
+    return groups;
+}
+
+
+console.log(findGroup(badge_records))
