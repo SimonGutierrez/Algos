@@ -1,3 +1,4 @@
+/* eslint-disable guard-for-in */
 /*
 Medium:
 
@@ -47,16 +48,48 @@ const badge_times = [
     ['Jennifer',  '730'],
     ['John',     '1630'],
     ['Jennifer',    '5']
-  ]
+  ];
 
-const findShady = (input) => {
-    let employees = {};
+const findRedFlags = (array) => {
+    let left = 0;
+    let right = 1;
+    let res = [];
 
-    for (let [employee, time] of input) {
-        employees[employee] ? employees[employee].push(time) : employees[employee] = [time]
+    while (right < array.length) {
+        let leftTime = Number(array[left]);
+        let rightTime = Number(array[right]);
+
+        if (leftTime >= rightTime - 100) {
+            if (!res.length) res.push(leftTime);
+            res.push(rightTime);
+            right++;
+        } else {
+            if (res.length >= 3) return res;
+            left++;
+            res = [];
+        }
     }
 
-    return employees;
+    return res.length >= 3 ? res : false;
+}
+
+const findShady = (twoDArray) => {
+    let employees = {};
+    let redFlags = {};
+
+    for (let [employee, time] of twoDArray) employees[employee] ? employees[employee].push(time) : employees[employee] = [time];
+
+    for (let employee in employees) {
+        let timeStamps = employees[employee];
+
+        timeStamps.sort((a, b) => a - b);
+
+        const flags = findRedFlags(timeStamps);
+
+        if (flags) redFlags[employee] = flags;
+    }
+
+    return redFlags;
 }
 
 console.log(findShady(badge_times))
