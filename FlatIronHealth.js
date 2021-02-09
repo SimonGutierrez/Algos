@@ -163,7 +163,7 @@ const findBoxes = (board) => {
     return res;
 }
 
-console.log(findBoxes(board2))
+// console.log(findBoxes(board2))
 /*
 [
     [ [ 0, 0 ], [ 0, 0 ] ],
@@ -353,25 +353,34 @@ const prereqs_courses3 = [
 
 // find the start and end points
 function prereqs_courses(array) {
-  let courses = {};
+  let potentialStart = array[0][0];
+  let preReqBank = {};
+  let found = false;
+  let res = [];
 
-  for (let preReqs of array) {
-    let [course, preReq] = preReqs;
-    courses[course] = preReq;
+  while (!found) {
+      let temp = potentialStart;
+
+      for (let i = 0; i < array.length; i++) {
+          if (!preReqBank[array[i][0]]) preReqBank[array[i][0]] = array[i][1];
+          if (array[i][1] === potentialStart) {
+              potentialStart = array[i][0];
+              break;
+          }
+      }
+
+      if (temp === potentialStart) found = true;
   }
 
-  let key = array[0][0];
-  let potentialStart;
-
-  while (courses[key]) {
-    key = courses[key];
-
-    if (courses[key]) {
-      potentialStart = courses[key];
-    }
+  while (potentialStart) {
+    res.push(potentialStart);
+    potentialStart = preReqBank[potentialStart];
   }
 
-  return potentialStart;
+  let middleIdx = Math.ceil(res.length / 2) - 1;
+
+  return res[middleIdx];
 }
-
-console.log(prereqs_courses(prereqs_courses1));
+console.log(prereqs_courses(prereqs_courses1)); // "Data Structures"
+console.log(prereqs_courses(prereqs_courses2)); // "Algorithms"
+console.log(prereqs_courses(prereqs_courses3)); // "Data Structures"

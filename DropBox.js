@@ -92,7 +92,7 @@ const findShady = (twoDArray) => {
     return redFlags;
 }
 
-// console.log(findShady(badge_times))
+console.log(findShady(badge_times))
 
 /*
 Hard:
@@ -166,3 +166,106 @@ const findGroup = (twoDArray) => {
 
 
 console.log(findGroup(badge_records))
+
+
+/*
+ESCAPE ROOMS:
+youre given a set of codes to crack with a word bank, see if you can create any of the words in the word bank with the letters in the code.
+
+constaints:
+- a code is 7 letters long containing only all unique letters
+- a word must contain the first letter in the code to be considered a valid word
+
+input:
+worslist: ['APPLE', 'PLEAS', 'PLEASE']
+keypad: ['AELWXYZ', 'AELPXYZ', 'AELPSXY', 'SAELPRT', 'XAEBKSY']
+
+output:
+ [0, 1, 3, 2, 0]
+
+ Explaination:
+ keypad-
+ index
+ 0 - (0) no words can be made
+ 1 - (1) apple can only be made
+ 2 - (3) all words can be made and contain key 'A'
+ 3 - (2) pleas and please can be made
+ 4 - (0) no words contain key 'X'
+
+*/
+
+// this solution is too slow
+function numKeypadSolutions(wordlist, keypads) {
+    let res = [];
+    let wordBank = [];
+    let keypadBank = [];
+
+    for (let word of wordlist) {
+        let wordObj = { unique: 0 };
+        for (let char of word) {
+            if (!wordObj[char]) {
+                wordObj[char] = 1;
+                wordObj.unique++;
+            }
+        }
+        wordBank.push(wordObj);
+    }
+
+    for (let keypad of keypads) {
+        let keypadObj = { key: keypad[0] };
+        for (let char of keypad) {
+            if (char !== keypad[0]) keypadObj[char] = 1;
+        }
+        keypadBank.push(keypadObj);
+    }
+
+    for (let i = 0; i < keypadBank.length; i++) {
+        let currKeyPad = keypadBank[i];
+
+        res.push(findWords(currKeyPad, wordBank));
+    }
+
+    return res;
+}
+
+function findWords(keypad, words) {
+    let count = 0;
+
+    for (let i = 0; i < words.length; i++) {
+        let word = words[i];
+        let uniqueCounter = word.unique;
+
+        if (!word[keypad.key]) continue;
+        uniqueCounter--;
+        for (let char in word) {
+            if (keypad[char]) uniqueCounter--;
+        }
+
+        if (uniqueCounter === 0) count++;
+    }
+
+    return count;
+}
+
+// use hash map a - z
+const numKeypadSolutionsII = (wordlist, keypads) => {
+    let res = [];
+    let wordBank = [];
+
+    for (let word of wordlist) {
+        let wordObj = { unique: 0 };
+        for (let char of word) {
+            if (!wordObj[char]) {
+                wordObj[char] = 1;
+                wordObj.unique++;
+            }
+        }
+        wordBank.push(wordObj);
+    }
+
+    for (let keypad of keypads) {
+        for (let i = 0; i < keypad.length; i++) {
+
+        }
+    }
+}
