@@ -363,7 +363,7 @@ function prereqs_courses(array) {
       for (let i = 0; i < array.length; i++) {
           // fill in our bank to have the correct classes and prereqs
           if (!preReqBank[array[i][0]]) preReqBank[array[i][0]] = array[i][1];
-          // cont changing our potential start to the prereq until start is found
+          // cont changing our potential start to the prereq until start is found, start has no prereq
           if (array[i][1] === potentialStart) {
               potentialStart = array[i][0];
               break;

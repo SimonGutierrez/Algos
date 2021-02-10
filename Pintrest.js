@@ -36,27 +36,16 @@ const string4 = 'bbabylkkj';
 const isCheating = (words, string) => {
     let stringBank = {};
 
-    for (let char of string) {
-        if (stringBank[char]) {
-            stringBank[char]++;
-        } else {
-            stringBank[char] = 1;
-        }
-    }
+    for (let char of string) stringBank[char] ? stringBank[char]++ : stringBank[char] = 1;
 
     for (let i = 0; i < words.length; i++) {
         let word = words[i], wordBank = {}, count = 0;
 
         for (let char of word) {
-            if (wordBank[char]) {
-                wordBank[char]++;
-            } else {
-                wordBank[char] = 1;
-            }
+            wordBank[char] ? wordBank[char]++ : wordBank[char] = 1;
 
             if (wordBank[char] <= stringBank[char]) count++;
         }
-
 
         if (count === word.length) return word;
     }
@@ -268,13 +257,13 @@ r l d !
 */
 
 // console.log(encyrpt(message, r1, c1));
-console.log(encyrpt(message, r1, c1) === 'Hore llWdlo!')
-// console.log(encyrpt(message, r2, c2));
-console.log(encryptII(message, r2, c2) === 'HloWrdel ol!')
-// console.log(encyrpt(message, r3, c3));
-console.log(encyrpt(message, r3, c3) === 'HWeolrllod !')
-// console.log(encyrpt(message2, r4, c4));
-console.log(encyrpt(message2, r4, c4) === 'Ihv  ra aeaDem')
+// console.log(encyrpt(message, r1, c1) === 'Hore llWdlo!')
+// // console.log(encyrpt(message, r2, c2));
+// console.log(encryptII(message, r2, c2) === 'HloWrdel ol!')
+// // console.log(encyrpt(message, r3, c3));
+// console.log(encyrpt(message, r3, c3) === 'HWeolrllod !')
+// // console.log(encyrpt(message2, r4, c4));
+// console.log(encyrpt(message2, r4, c4) === 'Ihv  ra aeaDem')
 
 ///////////////////
 /*
