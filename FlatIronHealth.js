@@ -360,18 +360,20 @@ function prereqs_courses(array) {
 
   while (!found) {
       let temp = potentialStart;
-
       for (let i = 0; i < array.length; i++) {
+          // fill in our bank to have the correct classes and prereqs
           if (!preReqBank[array[i][0]]) preReqBank[array[i][0]] = array[i][1];
+          // cont changing our potential start to the prereq until start is found
           if (array[i][1] === potentialStart) {
               potentialStart = array[i][0];
               break;
           }
       }
-
+      // our start is found when the potential start is has not changed, meaning there is no prereq for this class
       if (temp === potentialStart) found = true;
   }
 
+  // fill in our res array in order starting from the new found start
   while (potentialStart) {
     res.push(potentialStart);
     potentialStart = preReqBank[potentialStart];
@@ -380,7 +382,13 @@ function prereqs_courses(array) {
   let middleIdx = Math.ceil(res.length / 2) - 1;
 
   return res[middleIdx];
+
 }
+// Time = O(n^2 + n) - to find our start point worst case senario we start looking at the end of the list and will have to work our way up, just like in example 1, this will result in a n(n - 1) / 2 time which reduces down to n^2 then we need to loop through our newly made bank Obj to find the right order which is n
+
+// Space: O(n) where n is the number of clasees avail
+
+
 console.log(prereqs_courses(prereqs_courses1)); // "Data Structures"
 console.log(prereqs_courses(prereqs_courses2)); // "Algorithms"
 console.log(prereqs_courses(prereqs_courses3)); // "Data Structures"
