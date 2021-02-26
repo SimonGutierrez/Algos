@@ -29,3 +29,23 @@ const rotate = (matrix) => {
 };
 
 console.log(rotate(matrix1))
+
+
+// second solution: transpose the matrix then reverse each row
+
+const rotateII = (matrix) => {
+    // tanspose the matrix
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = i; j < matrix[0].length; j++) {
+            let temp = matrix[i][j];
+            matrix[i][j] = matrix[j][i];
+            matrix[j][i] = temp;
+        }
+    }
+    // reverse each row to indicate correct rotation
+    matrix.forEach((row) => row.reverse());
+
+    return matrix;
+};
+
+console.log(rotateII(matrix1))
